@@ -1,0 +1,14 @@
+/Users/rusenakbal/Desktop/CSTEST/bin/Debug/net8.0/CSTEST
+/Users/rusenakbal/Desktop/CSTEST/bin/Debug/net8.0/CSTEST.deps.json
+/Users/rusenakbal/Desktop/CSTEST/bin/Debug/net8.0/CSTEST.runtimeconfig.json
+/Users/rusenakbal/Desktop/CSTEST/bin/Debug/net8.0/CSTEST.dll
+/Users/rusenakbal/Desktop/CSTEST/bin/Debug/net8.0/CSTEST.pdb
+/Users/rusenakbal/Desktop/CSTEST/obj/Debug/net8.0/CSTEST.GeneratedMSBuildEditorConfig.editorconfig
+/Users/rusenakbal/Desktop/CSTEST/obj/Debug/net8.0/CSTEST.AssemblyInfoInputs.cache
+/Users/rusenakbal/Desktop/CSTEST/obj/Debug/net8.0/CSTEST.AssemblyInfo.cs
+/Users/rusenakbal/Desktop/CSTEST/obj/Debug/net8.0/CSTEST.csproj.CoreCompileInputs.cache
+/Users/rusenakbal/Desktop/CSTEST/obj/Debug/net8.0/CSTEST.dll
+/Users/rusenakbal/Desktop/CSTEST/obj/Debug/net8.0/refint/CSTEST.dll
+/Users/rusenakbal/Desktop/CSTEST/obj/Debug/net8.0/CSTEST.pdb
+/Users/rusenakbal/Desktop/CSTEST/obj/Debug/net8.0/CSTEST.genruntimeconfig.cache
+/Users/rusenakbal/Desktop/CSTEST/obj/Debug/net8.0/ref/CSTEST.dll
