@@ -318,7 +318,7 @@ public class Program
                 && (pos7Color == pos8Color && pos8Color == pos9Color))
         {
             if (printSeq)
-                Console.WriteLine"Row3:Seq.4 - 90 Points");
+                Console.WriteLine("Row3:Seq.4 - 90 Points");
             tablePoint += 90;
         }
 
@@ -938,6 +938,4 @@ public class Program
             tablePoint += 20;
         }
     }
-
-}
 }

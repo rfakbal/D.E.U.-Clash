@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CSTEST")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c42ba775efd61b8000f7186370c6216bb1a89d19")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+43cce301625c20299672f3e888a1ffc6aec70dc1")]
 [assembly: System.Reflection.AssemblyProductAttribute("CSTEST")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CSTEST")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
