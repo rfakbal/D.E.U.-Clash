@@ -939,7 +939,7 @@ public class Program
         }
 
         // Code block of the Computer move
-        int maxPoint = 0, maxPosition = 0, maxColor = 0, maxValue = 0;
+        int maxPoint = 0, maxPosition = -1, maxColor = 0, maxValue = 0;
         Random rd = new Random();
         printSeq = false;
     
