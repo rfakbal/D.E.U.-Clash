@@ -1220,5 +1220,95 @@ public class Program
             Console.WriteLine();
         }
         Console.WriteLine(" +--------+");
+        // Declare variables for position values and colors
+        int pos1Value, pos1Color;
+        int pos2Value, pos2Color;
+        int pos3Value, pos3Color;
+        int pos4Value, pos4Color;
+        int pos5Value, pos5Color;
+        int pos6Value, pos6Color;
+        int pos7Value, pos7Color;
+        int pos8Value, pos8Color;
+        int pos9Value, pos9Color;
+
+        int inputPos; // Variable to hold the user-selected position
+
+        // Prompt user for the position to edit
+        Console.WriteLine("Enter a Position to Edit (1-9):");
+        inputPos = Convert.ToInt32(Console.ReadLine()) - 1; // Convert input to zero-based index
+
+        // Validate input position
+        if (inputPos < 0 || inputPos > 8)
+        {
+            Console.WriteLine("Invalid position. Please enter a number between 1 and 9.");
+            return; // Exit if the position is out of range
+        }
+
+        // Prompt user for the new letter value
+        Console.WriteLine("Enter The New Letter (1-D, 2-E, 3-U):");
+        int inputValue = Convert.ToInt32(Console.ReadLine()); // Get the new letter value
+
+        // Validate letter input
+        if (inputValue < 1 || inputValue > 3)
+        {
+            Console.WriteLine("Invalid letter choice. Please enter 1, 2, or 3.");
+            return; // Exit if the letter input is invalid
+        }
+
+        // Prompt user for the new color
+        Console.WriteLine("Enter The New Color (1-Red, 2-Green, 3-Blue):");
+        int inputColor = Convert.ToInt32(Console.ReadLine()); // Get the new color value
+
+        // Validate color input
+        if (inputColor < 1 || inputColor > 3)
+        {
+            Console.WriteLine("Invalid color choice. Please enter 1, 2, or 3.");
+            return; // Exit if the color input is invalid
+        }
+
+        // Update the corresponding position based on user input
+        switch (inputPos)
+        {
+            case 0:
+                pos1Value = inputValue;
+                pos1Color = inputColor;
+                break;
+            case 1:
+                pos2Value = inputValue;
+                pos2Color = inputColor;
+                break;
+            case 2:
+                pos3Value = inputValue;
+                pos3Color = inputColor;
+                break;
+            case 3:
+                pos4Value = inputValue;
+                pos4Color = inputColor;
+                break;
+            case 4:
+                pos5Value = inputValue;
+                pos5Color = inputColor;
+                break;
+            case 5:
+                pos6Value = inputValue;
+                pos6Color = inputColor;
+                break;
+            case 6:
+                pos7Value = inputValue;
+                pos7Color = inputColor;
+                break;
+            case 7:
+                pos8Value = inputValue;
+                pos8Color = inputColor;
+                break;
+            case 8:
+                pos9Value = inputValue;
+                pos9Color = inputColor;
+                break;
+        }
+
+        // Confirm to the user that the position has been updated
+        Console.WriteLine("Position updated successfully!");
+
     }
 }
