@@ -1104,5 +1104,121 @@ public class Program
             }
         }
         printSeq = true;
+
+
+        // Printing board
+        Console.WriteLine("   1 2 3");
+        Console.WriteLine(" +--------+");
+        for (int j = 0; j < 3; j++)
+        {
+            Console.Write((j + 1) + "| ");
+            for (int k = 0; k < 3; k++)
+            {
+                int posIndex = j * 3 + k; // Calculate position index
+                int value = 0, color = 0;
+
+                // Determine the value and color based on position index
+                // Each case corresponds to a specific cell on the 3x3 board
+                switch (posIndex)
+                {
+                    case 0:
+                        value = pos1Value;
+                        color = pos1Color;
+                        break;
+                    case 1:
+                        value = pos2Value;
+                        color = pos2Color;
+                        break;
+                    case 2:
+                        value = pos3Value;
+                        color = pos3Color;
+                        break;
+                    case 3:
+                        value = pos4Value;
+                        color = pos4Color;
+                        break;
+                    case 4:
+                        value = pos5Value;
+                        color = pos5Color;
+                        break;
+                    case 5:
+                        value = pos6Value;
+                        color = pos6Color;
+                        break;
+                    case 6:
+                        value = pos7Value;
+                        color = pos7Color;
+                        break;
+                    case 7:
+                        value = pos8Value;
+                        color = pos8Color;
+                        break;
+                    case 8:
+                        value = pos9Value;
+                        color = pos9Color;
+                        break;
+                    default:
+                        value = -1;
+                        color = -1;
+                        break;
+                }
+
+
+                string displayChar = "";
+                // If value is 1, it represents "D" with different color symbols
+                if (value == 1)
+                {
+                    if (color == 1)
+                    {
+                        displayChar = "D."; // Red
+                    }
+                    else if (color == 2)
+                    {
+                        displayChar = "D "; // Green
+                    }
+                    else if (color == 3)
+                    {
+                        displayChar = "D_"; // Blue
+                    }
+                }
+                // If value is 2, it represents "E" with different color symbols
+                else if (value == 2)
+                {
+                    if (color == 1)
+                    {
+                        displayChar = "E."; // Red
+                    }
+                    else if (color == 2)
+                    {
+                        displayChar = "E "; // Green
+                    }
+                    else if (color == 3)
+                    {
+                        displayChar = "E_"; // Blue
+                    }
+                }
+                // If value is 3, it represents "U" with different color symbols
+                else if (value == 3)
+                {
+                    if (color == 1)
+                    {
+                        displayChar = "U."; // Red
+                    }
+                    else if (color == 2)
+                    {
+                        displayChar = "U "; // Green
+                    }
+                    else if (color == 3)
+                    {
+                        displayChar = "U_"; // Blue
+                    }
+                }
+
+                Console.Write(displayChar); // Print the character on the board
+            }
+            Console.Write(" |");
+            Console.WriteLine();
+        }
+        Console.WriteLine(" +--------+");
     }
 }
