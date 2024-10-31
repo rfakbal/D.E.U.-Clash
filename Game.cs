@@ -1,0 +1,1881 @@
+﻿
+using System;
+using System.Drawing;
+using System.Security.Cryptography.X509Certificates;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace DEU_Lettters_Game {
+public class Game
+{
+    public static int pos1Value, pos2Value, pos3Value, pos4Value, pos5Value,
+            pos6Value, pos7Value, pos8Value, pos9Value,
+            pos1Color, pos2Color, pos3Color, pos4Color, pos5Color, pos6Color, pos7Color, pos8Color, pos9Color;
+    public static int userPoint, computerPoint, tablePoint;
+        public static int easy, medium, hard;
+    public static bool printSeq = true;
+    public static bool deuOrdered;
+
+    public static void printBoard()
+    {
+        Console.WriteLine("   1 2 3");
+        Console.WriteLine(" +--------+");
+        for (int i = 0; i < 3; i++)
+        {
+            Console.Write((i + 1) + "| ");
+            for (int j = 0; j < 3; j++)
+            {
+                int posIndex = i * 3 + j;
+                int value = 0, color = 0;
+                switch (posIndex)
+                {
+                    case 0:
+                        value = pos1Value;
+                        color = pos1Color;
+                        break;
+                    case 1:
+                        value = pos2Value;
+                        color = pos2Color;
+                        break;
+                    case 2:
+                        value = pos3Value;
+                        color = pos3Color;
+                        break;
+                    case 3:
+                        value = pos4Value;
+                        color = pos4Color;
+                        break;
+                    case 4:
+                        value = pos5Value;
+                        color = pos5Color;
+                        break;
+                    case 5:
+                        value = pos6Value;
+                        color = pos6Color;
+                        break;
+                    case 6:
+                        value = pos7Value;
+                        color = pos7Color;
+                        break;
+                    case 7:
+                        value = pos8Value;
+                        color = pos8Color;
+                        break;
+                    case 8:
+                        value = pos9Value;
+                        color = pos9Color;
+                        break;
+                    default:
+                        value = -1;
+                        color = -1;
+                        break;
+                }
+
+
+                string displayChar = "";
+                if (value == 1)
+                { // D
+                    if (color == 1)
+                    {
+                        displayChar = "D "; // Red
+                        Console.ForegroundColor = ConsoleColor.Red;
+
+                    }
+                    else if (color == 2)
+                    {
+                        displayChar = "D "; // Green
+                        Console.ForegroundColor = ConsoleColor.Green;
+
+                    }
+                    else if (color == 3)
+                    {
+                        displayChar = "D "; // Blue
+                        Console.ForegroundColor = ConsoleColor.Blue;
+
+                    }
+                }
+                else if (value == 2)
+                { //E
+                    if (color == 1)
+                    {
+                        displayChar = "E ";
+                        Console.ForegroundColor = ConsoleColor.Red;
+
+                    }
+                    else if (color == 2)
+                    {
+                        displayChar = "E ";
+                        Console.ForegroundColor = ConsoleColor.Green;
+
+                    }
+                    else if (color == 3)
+                    {
+                        displayChar = "E ";
+                        Console.ForegroundColor = ConsoleColor.Blue;
+
+                    }
+                }
+                else if (value == 3)
+                { //U
+                    if (color == 1)
+                    {
+                        displayChar = "U ";
+                        Console.ForegroundColor = ConsoleColor.Red;
+
+                    }
+                    else if (color == 2)
+                    {
+                        displayChar = "U ";
+                        Console.ForegroundColor = ConsoleColor.Green;
+
+                    }
+                    else if (color == 3)
+                    {
+                        displayChar = "U ";
+                        Console.ForegroundColor = ConsoleColor.Blue;
+
+                    }
+                }
+
+                Console.Write(displayChar);
+
+            }
+            Console.ResetColor();
+            Console.WriteLine(" |");
+        }
+        Console.WriteLine(" +--------+");
+    }
+
+
+    public static void getInput()
+    {
+        Console.WriteLine("Enter a Position to Edit (1-9):");
+        int inputPos = Convert.ToInt32(Console.ReadLine()) - 1;
+
+        Console.WriteLine("Enter The New Letter (1-D, 2-E, 3-U):");
+        int inputValue = Convert.ToInt32(Console.ReadLine());
+
+        Console.WriteLine("Enter The New Color (1-Red, 2-Green, 3-Blue):");
+        int inputColor = Convert.ToInt32(Console.ReadLine());
+
+        switch (inputPos)
+        {
+            case 0:
+                pos1Value = inputValue;
+                pos1Color = inputColor;
+                break;
+            case 1:
+                pos2Value = inputValue;
+                pos2Color = inputColor;
+                break;
+            case 2:
+                pos3Value = inputValue;
+                pos3Color = inputColor;
+                break;
+            case 3:
+                pos4Value = inputValue;
+                pos4Color = inputColor;
+                break;
+            case 4:
+                pos5Value = inputValue;
+                pos5Color = inputColor;
+                break;
+            case 5:
+                pos6Value = inputValue;
+                pos6Color = inputColor;
+                break;
+            case 6:
+                pos7Value = inputValue;
+                pos7Color = inputColor;
+                break;
+            case 7:
+                pos8Value = inputValue;
+                pos8Color = inputColor;
+                break;
+            case 8:
+                pos9Value = inputValue;
+                pos9Color = inputColor;
+                break;
+            default:
+                Console.WriteLine("Invalid position.");
+                break;
+        }
+    }
+
+    public static void printValue()
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            Console.Write((j + 1) + "| ");
+            for (int k = 0; k < 3; k++)
+            {
+                int posIndex = j * 3 + k;
+                int value = 0, color = 0;
+                switch (posIndex)
+                {
+                    case 0:
+                        value = pos1Value;
+                        color = pos1Color;
+                        break;
+                    case 1:
+                        value = pos2Value;
+                        color = pos2Color;
+                        break;
+                    case 2:
+                        value = pos3Value;
+                        color = pos3Color;
+                        break;
+                    case 3:
+                        value = pos4Value;
+                        color = pos4Color;
+                        break;
+                    case 4:
+                        value = pos5Value;
+                        color = pos5Color;
+                        break;
+                    case 5:
+                        value = pos6Value;
+                        color = pos6Color;
+                        break;
+                    case 6:
+                        value = pos7Value;
+                        color = pos7Color;
+                        break;
+                    case 7:
+                        value = pos8Value;
+                        color = pos8Color;
+                        break;
+                    case 8:
+                        value = pos9Value;
+                        color = pos9Color;
+                        break;
+                    default:
+                        value = -1;
+                        color = -1;
+                        break;
+                }
+
+                string displayChar = "";
+                if (value == 1)
+                { // D
+                    if (color == 1)
+                    {
+                        displayChar = "D ";
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                    else if (color == 2)
+                    {
+                        displayChar = "D ";
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    }
+                    else if (color == 3)
+                    {
+                        displayChar = "D ";
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                    }
+                }
+                else if (value == 2)
+                { // E
+                    if (color == 1)
+                    {
+                        displayChar = "E ";
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                    else if (color == 2)
+                    {
+                        displayChar = "E ";
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    }
+                    else if (color == 3)
+                    {
+                        displayChar = "E ";
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                    }
+                }
+                else if (value == 3)
+                { // U
+                    if (color == 1)
+                    {
+                        displayChar = "U ";
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                    else if (color == 2)
+                    {
+                        displayChar = "U ";
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    }
+                    else if (color == 3)
+                    {
+                        displayChar = "U ";
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                    }
+                }
+
+                Console.Write(displayChar);
+            }
+            Console.ResetColor();
+            Console.WriteLine(" |");
+        }
+    }
+
+    public static void printRandom()
+    {
+        Random rand = new Random();
+
+        pos1Value = rand.Next(3) + 1;
+        pos1Color = rand.Next(3) + 1;
+
+        pos2Value = rand.Next(3) + 1;
+        pos2Color = rand.Next(3) + 1;
+
+        pos3Value = rand.Next(3) + 1;
+        pos3Color = rand.Next(3) + 1;
+
+        pos4Value = rand.Next(3) + 1;
+        pos4Color = rand.Next(3) + 1;
+
+        pos5Value = rand.Next(3) + 1;
+        pos5Color = rand.Next(3) + 1;
+
+        pos6Value = rand.Next(3) + 1;
+        pos6Color = rand.Next(3) + 1;
+
+        pos7Value = rand.Next(3) + 1;
+        pos7Color = rand.Next(3) + 1;
+
+        pos8Value = rand.Next(3) + 1;
+        pos8Color = rand.Next(3) + 1;
+
+        pos9Value = rand.Next(3) + 1;
+        pos9Color = rand.Next(3) + 1;
+    }
+
+        public static void CheckSequences()
+        {
+
+            if ((pos1Value == 1 && pos2Value == 2 && pos3Value == 3 && (pos1Color == pos2Color && pos2Color == pos3Color))
+                    || (pos1Value == 3 && pos2Value == 2 && pos3Value == 1
+                            && (pos1Color == pos2Color && pos2Color == pos3Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row1:Seq.1 120 Points");
+                tablePoint += 120;
+            }
+            if ((pos4Value == 1 && pos5Value == 2 && pos6Value == 3 && (pos4Color == pos5Color && pos5Color == pos6Color))
+                    || (pos4Value == 3 && pos5Value == 2 && pos6Value == 1
+                            && (pos4Color == pos5Color && pos5Color == pos6Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row2:Seq.1 120 Points");
+                tablePoint += 120;
+            }
+            if ((pos7Value == 1 && pos8Value == 2 && pos9Value == 3 && (pos7Color == pos8Color && pos8Color == pos9Color))
+                    || (pos7Value == 3 && pos8Value == 2 && pos9Value == 1
+                            && (pos7Color == pos8Color && pos8Color == pos9Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row3:Seq.1 120 Points");
+                tablePoint += 120;
+            }
+
+            if ((pos1Value == 1 && pos5Value == 2 && pos9Value == 3 && (pos1Color == pos5Color && pos5Color == pos9Color))
+                    || (pos1Value == 3 && pos5Value == 2 && pos9Value == 1
+                            && (pos1Color == pos5Color && pos5Color == pos9Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag1:Seq.1 120 Points");
+                tablePoint += 120;
+            }
+
+            if ((pos3Value == 1 && pos5Value == 2 && pos7Value == 3 && (pos3Color == pos5Color && pos5Color == pos7Color))
+                    || (pos3Value == 3 && pos5Value == 2 && pos7Value == 1
+                            && (pos3Color == pos5Color && pos5Color == pos7Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag2:Seq.1 120 Points");
+                tablePoint += 120;
+            }
+            if ((pos1Value == 1 && pos4Value == 2 && pos7Value == 3 && (pos1Color == pos4Color && pos4Color == pos7Color))
+                    || (pos1Value == 3 && pos4Value == 2 && pos7Value == 1
+                            && (pos1Color == pos4Color && pos4Color == pos7Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col1:Seq.1 120 Points");
+                tablePoint += 120;
+            }
+            if ((pos2Value == 1 && pos5Value == 2 && pos8Value == 3 && (pos2Color == pos5Color && pos5Color == pos8Color))
+                    || (pos2Value == 3 && pos5Value == 2 && pos8Value == 1
+                            && (pos2Color == pos5Color && pos5Color == pos8Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col2:Seq.1 120 Points");
+                tablePoint += 120;
+            }
+            if ((pos3Value == 1 && pos6Value == 2 && pos9Value == 3 && (pos3Color == pos6Color && pos6Color == pos9Color))
+                    || (pos3Value == 3 && pos6Value == 2 && pos9Value == 1
+                            && (pos3Color == pos6Color && pos6Color == pos9Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col3:Seq.1 120 Points");
+                tablePoint += 120;
+            }
+            //Checking sequence 2 
+            if ((pos1Value == 1 && pos2Value == 2 && pos3Value == 3
+                    && (pos1Color != pos2Color && pos2Color != pos3Color && pos1Color != pos3Color))
+                    || (pos1Value == 3 && pos2Value == 2 && pos3Value == 1
+                            && (pos1Color != pos2Color && pos2Color != pos3Color && pos1Color != pos3Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row1:Seq.2 - 110 Points");
+                tablePoint += 110;
+            }
+            if ((pos4Value == 1 && pos5Value == 2 && pos6Value == 3
+                    && (pos4Color != pos5Color && pos5Color != pos6Color && pos4Color != pos6Color))
+                    || (pos4Value == 3 && pos5Value == 2 && pos6Value == 1
+                            && (pos4Color != pos5Color && pos5Color != pos6Color && pos4Color != pos6Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row2:Seq.2 - 110 Points");
+                tablePoint += 110;
+            }
+            if ((pos7Value == 1 && pos8Value == 2 && pos9Value == 3
+                    && (pos7Color != pos8Color && pos8Color != pos9Color && pos7Color != pos9Color))
+                    || (pos7Value == 3 && pos8Value == 2 && pos9Value == 1
+                            && (pos7Color != pos8Color && pos8Color != pos9Color && pos7Color != pos9Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row3:Seq.2 - 110 Points");
+                tablePoint += 110;
+            }
+
+            if ((pos1Value == 1 && pos5Value == 2 && pos9Value == 3
+                    && (pos1Color != pos5Color && pos5Color != pos9Color && pos1Color != pos9Color))
+                    || (pos1Value == 3 && pos5Value == 2 && pos9Value == 1
+                            && (pos1Color != pos5Color && pos5Color != pos9Color && pos1Color != pos9Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag1:Seq.2 - 110 Points");
+                tablePoint += 110;
+            }
+
+            if ((pos3Value == 1 && pos5Value == 2 && pos7Value == 3
+                    && (pos3Color != pos5Color && pos5Color != pos7Color && pos3Color != pos7Color))
+                    || (pos3Value == 3 && pos5Value == 2 && pos7Value == 1
+                            && (pos3Color != pos5Color && pos5Color != pos7Color && pos3Color != pos7Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag2:Seq.2 - 110 Points");
+                tablePoint += 110;
+            }
+            if ((pos1Value == 1 && pos4Value == 2 && pos7Value == 3
+                    && (pos1Color != pos4Color && pos4Color != pos7Color && pos1Color != pos7Color))
+                    || (pos1Value == 3 && pos4Value == 2 && pos7Value == 1
+                            && (pos1Color != pos4Color && pos4Color != pos7Color && pos1Color != pos7Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col1:Seq.2 - 110 Points");
+                tablePoint += 110;
+            }
+            if ((pos2Value == 1 && pos5Value == 2 && pos8Value == 3
+                    && (pos2Color != pos5Color && pos5Color != pos8Color && pos2Color != pos8Color))
+                    || (pos2Value == 3 && pos5Value == 2 && pos8Value == 1
+                            && (pos2Color != pos5Color && pos5Color != pos8Color && pos2Color != pos8Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col2:Seq.2 - 110 Points");
+                tablePoint += 110;
+            }
+            if ((pos3Value == 1 && pos6Value == 2 && pos9Value == 3
+                    && (pos3Color != pos6Color && pos6Color != pos9Color && pos3Color != pos9Color))
+                    || (pos3Value == 3 && pos6Value == 2 && pos9Value == 1
+                            && (pos3Color != pos6Color && pos6Color != pos9Color && pos3Color != pos9Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col3:Seq.2 - 110 Points");
+                tablePoint += 110;
+            }
+            //Checking Sequence 3
+            if ((pos1Value == 1 && pos2Value == 2 && pos3Value == 3 && !(pos1Color == pos2Color && pos2Color == pos3Color)
+                    && !(pos1Color != pos2Color && pos2Color != pos3Color && pos1Color != pos3Color))
+                    || (pos1Value == 3 && pos2Value == 2 && pos3Value == 1
+                            && !(pos1Color == pos2Color && pos2Color == pos3Color)
+                            && !(pos1Color != pos2Color && pos2Color != pos3Color && pos1Color != pos3Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row1:Seq.3 - 100 Points");
+                tablePoint += 100;
+            }
+            if ((pos4Value == 1 && pos5Value == 2 && pos6Value == 3 && !(pos4Color == pos5Color && pos5Color == pos6Color)
+                    && !(pos4Color != pos5Color && pos5Color != pos6Color && pos4Color != pos6Color))
+                    || (pos4Value == 3 && pos5Value == 2 && pos6Value == 1
+                            && !(pos4Color == pos5Color && pos5Color == pos6Color)
+                            && !(pos4Color != pos5Color && pos5Color != pos6Color && pos4Color != pos6Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row2:Seq.3 - 100 Points");
+                tablePoint += 100;
+            }
+            if ((pos7Value == 1 && pos8Value == 2 && pos9Value == 3 && !(pos7Color == pos8Color && pos8Color == pos9Color)
+                    && !(pos7Color != pos8Color && pos8Color != pos9Color && pos7Color != pos9Color))
+                    || (pos7Value == 3 && pos8Value == 2 && pos9Value == 1
+                            && !(pos7Color == pos8Color && pos8Color == pos9Color)
+                            && !(pos7Color != pos8Color && pos8Color != pos9Color && pos7Color != pos9Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row3:Seq.3 - 100 Points");
+                tablePoint += 100;
+            }
+
+            if ((pos1Value == 1 && pos5Value == 2 && pos9Value == 3 && !(pos1Color == pos5Color && pos5Color == pos9Color)
+                    && !(pos1Color != pos5Color && pos5Color != pos9Color && pos1Color != pos9Color))
+                    || (pos1Value == 3 && pos5Value == 2 && pos9Value == 1
+                            && !(pos1Color == pos5Color && pos5Color == pos9Color)
+                            && !(pos1Color != pos5Color && pos5Color != pos9Color && pos1Color != pos9Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag1:Seq.3 - 100 Points");
+                tablePoint += 100;
+            }
+
+            if ((pos3Value == 1 && pos5Value == 2 && pos7Value == 3 && !(pos3Color == pos5Color && pos5Color == pos7Color)
+                    && !(pos3Color != pos5Color && pos5Color != pos7Color && pos3Color != pos7Color))
+                    || (pos3Value == 3 && pos5Value == 2 && pos7Value == 1
+                            && !(pos3Color == pos5Color && pos5Color == pos7Color)
+                            && !(pos3Color != pos5Color && pos5Color != pos7Color && pos3Color != pos7Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag2:Seq.3 - 100 Points");
+                tablePoint += 100;
+            }
+
+            if ((pos1Value == 1 && pos4Value == 2 && pos7Value == 3 && !(pos1Color == pos4Color && pos4Color == pos7Color)
+                    && !(pos1Color != pos4Color && pos4Color != pos7Color && pos1Color != pos7Color))
+                    || (pos1Value == 3 && pos4Value == 2 && pos7Value == 1
+                            && !(pos1Color == pos4Color && pos4Color == pos7Color)
+                            && !(pos1Color != pos4Color && pos4Color != pos7Color && pos1Color != pos7Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col1:Seq.3 - 100 Points");
+                tablePoint += 100;
+            }
+
+            if ((pos2Value == 1 && pos5Value == 2 && pos8Value == 3 && !(pos2Color == pos5Color && pos5Color == pos8Color)
+                    && !(pos2Color != pos5Color && pos5Color != pos8Color && pos2Color != pos8Color))
+                    || (pos2Value == 3 && pos5Value == 2 && pos8Value == 1
+                            && !(pos2Color == pos5Color && pos5Color == pos8Color)
+                            && !(pos2Color != pos5Color && pos5Color != pos8Color && pos2Color != pos8Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col2:Seq.3 - 100 Points");
+                tablePoint += 100;
+            }
+
+            if ((pos3Value == 1 && pos6Value == 2 && pos9Value == 3 && !(pos3Color == pos6Color && pos6Color == pos9Color)
+                    && !(pos3Color != pos6Color && pos6Color != pos9Color && pos3Color != pos9Color))
+                    || (pos3Value == 3 && pos6Value == 2 && pos9Value == 1
+                            && !(pos3Color == pos6Color && pos6Color == pos9Color)
+                            && !(pos3Color != pos6Color && pos6Color != pos9Color && pos3Color != pos9Color)))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col3:Seq.3 - 100 Points");
+                tablePoint += 100;
+            }
+            //checking sequence 4
+            bool deuOrdered;
+
+            deuOrdered = (pos1Value == 1 && pos2Value == 2 && pos3Value == 3)
+                    || (pos1Value == 3 && pos2Value == 2 && pos3Value == 1);
+            if (!deuOrdered && (pos1Value != pos2Value && pos2Value != pos3Value && pos1Value != pos3Value)
+                    && (pos1Value == 1 || pos1Value == 2 || pos1Value == 3)
+                    && (pos2Value == 1 || pos2Value == 2 || pos2Value == 3)
+                    && (pos3Value == 1 || pos3Value == 2 || pos3Value == 3)
+                    && (pos1Color == pos2Color && pos2Color == pos3Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row1:Seq.4 - 90 Points");
+                tablePoint += 90;
+            }
+
+            deuOrdered = (pos4Value == 1 && pos5Value == 2 && pos6Value == 3)
+                    || (pos4Value == 3 && pos5Value == 2 && pos6Value == 1);
+            if (!deuOrdered && (pos4Value != pos5Value && pos5Value != pos6Value && pos4Value != pos6Value)
+                    && (pos4Value == 1 || pos4Value == 2 || pos4Value == 3)
+                    && (pos5Value == 1 || pos5Value == 2 || pos5Value == 3)
+                    && (pos6Value == 1 || pos6Value == 2 || pos6Value == 3)
+                    && (pos4Color == pos5Color && pos5Color == pos6Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row2:Seq.4 - 90 Points");
+                tablePoint += 90;
+            }
+
+            deuOrdered = (pos7Value == 1 && pos8Value == 2 && pos9Value == 3)
+                    || (pos7Value == 3 && pos8Value == 2 && pos9Value == 1);
+            if (!deuOrdered && (pos7Value != pos8Value && pos8Value != pos9Value && pos7Value != pos9Value)
+                    && (pos7Value == 1 || pos7Value == 2 || pos7Value == 3)
+                    && (pos8Value == 1 || pos8Value == 2 || pos8Value == 3)
+                    && (pos9Value == 1 || pos9Value == 2 || pos9Value == 3)
+                    && (pos7Color == pos8Color && pos8Color == pos9Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row3:Seq.4 - 90 Points");
+                tablePoint += 90;
+            }
+
+            deuOrdered = (pos1Value == 1 && pos5Value == 2 && pos9Value == 3)
+                    || (pos1Value == 3 && pos5Value == 2 && pos9Value == 1);
+            if (!deuOrdered && (pos1Value != pos5Value && pos5Value != pos9Value && pos1Value != pos9Value)
+                    && (pos1Value == 1 || pos1Value == 2 || pos1Value == 3)
+                    && (pos5Value == 1 || pos5Value == 2 || pos5Value == 3)
+                    && (pos9Value == 1 || pos9Value == 2 || pos9Value == 3)
+                    && (pos1Color == pos5Color && pos5Color == pos9Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag1:Seq.4 - 90 Points");
+                tablePoint += 90;
+            }
+
+            deuOrdered = (pos3Value == 1 && pos5Value == 2 && pos7Value == 3)
+                    || (pos3Value == 3 && pos5Value == 2 && pos7Value == 1);
+            if (!deuOrdered && (pos3Value != pos5Value && pos5Value != pos7Value && pos3Value != pos7Value)
+                    && (pos3Value == 1 || pos3Value == 2 || pos3Value == 3)
+                    && (pos5Value == 1 || pos5Value == 2 || pos5Value == 3)
+                    && (pos7Value == 1 || pos7Value == 2 || pos7Value == 3)
+                    && (pos3Color == pos5Color && pos5Color == pos7Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag2:Seq.4 - 90 Points");
+                tablePoint += 90;
+            }
+
+            deuOrdered = (pos1Value == 1 && pos4Value == 2 && pos7Value == 3)
+                    || (pos1Value == 3 && pos4Value == 2 && pos7Value == 1);
+            if (!deuOrdered && (pos1Value != pos4Value && pos4Value != pos7Value && pos1Value != pos7Value)
+                    && (pos1Value == 1 || pos1Value == 2 || pos1Value == 3)
+                    && (pos4Value == 1 || pos4Value == 2 || pos4Value == 3)
+                    && (pos7Value == 1 || pos7Value == 2 || pos7Value == 3)
+                    && (pos1Color == pos4Color && pos4Color == pos7Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col1:Seq.4 - 90 Points");
+                tablePoint += 90;
+            }
+
+            deuOrdered = (pos2Value == 1 && pos5Value == 2 && pos8Value == 3)
+                    || (pos2Value == 3 && pos5Value == 2 && pos8Value == 1);
+            if (!deuOrdered && (pos2Value != pos5Value && pos5Value != pos8Value && pos2Value != pos8Value)
+                    && (pos2Value == 1 || pos2Value == 2 || pos2Value == 3)
+                    && (pos5Value == 1 || pos5Value == 2 || pos5Value == 3)
+                    && (pos8Value == 1 || pos8Value == 2 || pos8Value == 3)
+                    && (pos2Color == pos5Color && pos5Color == pos8Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col2:Seq.4 - 90 Points");
+                tablePoint += 90;
+            }
+
+            deuOrdered = (pos3Value == 1 && pos6Value == 2 && pos9Value == 3)
+                    || (pos3Value == 3 && pos6Value == 2 && pos9Value == 1);
+            if (!deuOrdered && (pos3Value != pos6Value && pos6Value != pos9Value && pos3Value != pos9Value)
+                    && (pos3Value == 1 || pos3Value == 2 || pos3Value == 3)
+                    && (pos6Value == 1 || pos6Value == 2 || pos6Value == 3)
+                    && (pos9Value == 1 || pos9Value == 2 || pos9Value == 3)
+                    && (pos3Color == pos6Color && pos6Color == pos9Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col3:Seq.4 - 90 Points");
+                tablePoint += 90;
+            }
+            //Checking sequence 5
+
+            deuOrdered = (pos1Value == 1 && pos2Value == 2 && pos3Value == 3)
+                    || (pos1Value == 3 && pos2Value == 2 && pos3Value == 1);
+            if (!deuOrdered && (pos1Value != pos2Value && pos2Value != pos3Value && pos1Value != pos3Value)
+                    && (pos1Value == 1 || pos1Value == 2 || pos1Value == 3)
+                    && (pos2Value == 1 || pos2Value == 2 || pos2Value == 3)
+                    && (pos3Value == 1 || pos3Value == 2 || pos3Value == 3)
+                    && (pos1Color != pos2Color && pos2Color != pos3Color && pos1Color != pos3Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row1:Seq.5 - 80 Points");
+                tablePoint += 80;
+            }
+
+            deuOrdered = (pos4Value == 1 && pos5Value == 2 && pos6Value == 3)
+                    || (pos4Value == 3 && pos5Value == 2 && pos6Value == 1);
+            if (!deuOrdered && (pos4Value != pos5Value && pos5Value != pos6Value && pos4Value != pos6Value)
+                    && (pos4Value == 1 || pos4Value == 2 || pos4Value == 3)
+                    && (pos5Value == 1 || pos5Value == 2 || pos5Value == 3)
+                    && (pos6Value == 1 || pos6Value == 2 || pos6Value == 3)
+                    && (pos4Color != pos5Color && pos5Color != pos6Color && pos4Color != pos6Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row2:Seq.5 - 80 Points");
+                tablePoint += 80;
+            }
+
+            deuOrdered = (pos7Value == 1 && pos8Value == 2 && pos9Value == 3)
+                    || (pos7Value == 3 && pos8Value == 2 && pos9Value == 1);
+            if (!deuOrdered && (pos7Value != pos8Value && pos8Value != pos9Value && pos7Value != pos9Value)
+                    && (pos7Value == 1 || pos7Value == 2 || pos7Value == 3)
+                    && (pos8Value == 1 || pos8Value == 2 || pos8Value == 3)
+                    && (pos9Value == 1 || pos9Value == 2 || pos9Value == 3)
+                    && (pos7Color != pos8Color && pos8Color != pos9Color && pos7Color != pos9Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row3:Seq.5 - 80 Points");
+                tablePoint += 80;
+            }
+
+            deuOrdered = (pos1Value == 1 && pos5Value == 2 && pos9Value == 3)
+                    || (pos1Value == 3 && pos5Value == 2 && pos9Value == 1);
+            if (!deuOrdered && (pos1Value != pos5Value && pos5Value != pos9Value && pos1Value != pos9Value)
+                    && (pos1Value == 1 || pos1Value == 2 || pos1Value == 3)
+                    && (pos5Value == 1 || pos5Value == 2 || pos5Value == 3)
+                    && (pos9Value == 1 || pos9Value == 2 || pos9Value == 3)
+                    && (pos1Color != pos5Color && pos5Color != pos9Color && pos1Color != pos9Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag1:Seq.5 - 80 Points");
+                tablePoint += 80;
+            }
+
+            deuOrdered = (pos3Value == 1 && pos5Value == 2 && pos7Value == 3)
+                    || (pos3Value == 3 && pos5Value == 2 && pos7Value == 1);
+            if (!deuOrdered && (pos3Value != pos5Value && pos5Value != pos7Value && pos3Value != pos7Value)
+                    && (pos3Value == 1 || pos3Value == 2 || pos3Value == 3)
+                    && (pos5Value == 1 || pos5Value == 2 || pos5Value == 3)
+                    && (pos7Value == 1 || pos7Value == 2 || pos7Value == 3)
+                    && (pos3Color != pos5Color && pos5Color != pos7Color && pos3Color != pos7Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag2:Seq.5 - 80 Points");
+                tablePoint += 80;
+            }
+
+            deuOrdered = (pos1Value == 1 && pos4Value == 2 && pos7Value == 3)
+                    || (pos1Value == 3 && pos4Value == 2 && pos7Value == 1);
+            if (!deuOrdered && (pos1Value != pos4Value && pos4Value != pos7Value && pos1Value != pos7Value)
+                    && (pos1Value == 1 || pos1Value == 2 || pos1Value == 3)
+                    && (pos4Value == 1 || pos4Value == 2 || pos4Value == 3)
+                    && (pos7Value == 1 || pos7Value == 2 || pos7Value == 3)
+                    && (pos1Color != pos4Color && pos4Color != pos7Color && pos1Color != pos7Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col1:Seq.5 - 80 Points");
+                tablePoint += 80;
+            }
+
+            deuOrdered = (pos2Value == 1 && pos5Value == 2 && pos8Value == 3)
+                    || (pos2Value == 3 && pos5Value == 2 && pos8Value == 1);
+            if (!deuOrdered && (pos2Value != pos5Value && pos5Value != pos8Value && pos2Value != pos8Value)
+                    && (pos2Value == 1 || pos2Value == 2 || pos2Value == 3)
+                    && (pos5Value == 1 || pos5Value == 2 || pos5Value == 3)
+                    && (pos8Value == 1 || pos8Value == 2 || pos8Value == 3)
+                    && (pos2Color != pos5Color && pos5Color != pos8Color && pos2Color != pos8Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col2:Seq.5 - 80 Points");
+                tablePoint += 80;
+            }
+
+            deuOrdered = (pos3Value == 1 && pos6Value == 2 && pos9Value == 3)
+                    || (pos3Value == 3 && pos6Value == 2 && pos9Value == 1);
+            if (!deuOrdered && (pos3Value != pos6Value && pos6Value != pos9Value && pos3Value != pos9Value)
+                    && (pos3Value == 1 || pos3Value == 2 || pos3Value == 3)
+                    && (pos6Value == 1 || pos6Value == 2 || pos6Value == 3)
+                    && (pos9Value == 1 || pos9Value == 2 || pos9Value == 3)
+                    && (pos3Color != pos6Color && pos6Color != pos9Color && pos3Color != pos9Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col3:Seq.5 - 80 Points");
+                tablePoint += 80;
+            }
+            //Checking sequence 6
+
+            deuOrdered = (pos1Value == 1 && pos2Value == 2 && pos3Value == 3)
+                    || (pos1Value == 3 && pos2Value == 2 && pos3Value == 1);
+            if (!deuOrdered && (pos1Value != pos2Value && pos2Value != pos3Value && pos1Value != pos3Value)
+                    && (pos1Value == 1 || pos1Value == 2 || pos1Value == 3)
+                    && (pos2Value == 1 || pos2Value == 2 || pos2Value == 3)
+                    && (pos3Value == 1 || pos3Value == 2 || pos3Value == 3)
+                    && !(pos1Color == pos2Color && pos2Color == pos3Color)
+                    && (pos1Color == pos2Color || pos2Color == pos3Color || pos1Color == pos3Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row1:Seq.6 - 70 Points");
+                tablePoint += 70;
+            }
+
+            deuOrdered = (pos4Value == 1 && pos5Value == 2 && pos6Value == 3)
+                    || (pos4Value == 3 && pos5Value == 2 && pos6Value == 1);
+            if (!deuOrdered && (pos4Value != pos5Value && pos5Value != pos6Value && pos4Value != pos6Value)
+                    && (pos4Value == 1 || pos4Value == 2 || pos4Value == 3)
+                    && (pos5Value == 1 || pos5Value == 2 || pos5Value == 3)
+                    && (pos6Value == 1 || pos6Value == 2 || pos6Value == 3)
+                    && !(pos4Color == pos5Color && pos5Color == pos6Color)
+                    && (pos4Color == pos5Color || pos5Color == pos6Color || pos4Color == pos6Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row2:Seq.6 - 70 Points");
+                tablePoint += 70;
+            }
+
+            deuOrdered = (pos7Value == 1 && pos8Value == 2 && pos9Value == 3)
+                    || (pos7Value == 3 && pos8Value == 2 && pos9Value == 1);
+            if (!deuOrdered && (pos7Value != pos8Value && pos8Value != pos9Value && pos7Value != pos9Value)
+                    && (pos7Value == 1 || pos7Value == 2 || pos7Value == 3)
+                    && (pos8Value == 1 || pos8Value == 2 || pos8Value == 3)
+                    && (pos9Value == 1 || pos9Value == 2 || pos9Value == 3)
+                    && !(pos7Color == pos8Color && pos8Color == pos9Color)
+                    && (pos7Color == pos8Color || pos8Color == pos9Color || pos7Color == pos9Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row3:Seq.6 - 70 Points");
+                tablePoint += 70;
+            }
+
+            deuOrdered = (pos1Value == 1 && pos5Value == 2 && pos9Value == 3)
+                    || (pos1Value == 3 && pos5Value == 2 && pos9Value == 1);
+            if (!deuOrdered && (pos1Value != pos5Value && pos5Value != pos9Value && pos1Value != pos9Value)
+                    && (pos1Value == 1 || pos1Value == 2 || pos1Value == 3)
+                    && (pos5Value == 1 || pos5Value == 2 || pos5Value == 3)
+                    && (pos9Value == 1 || pos9Value == 2 || pos9Value == 3)
+                    && !(pos1Color == pos5Color && pos5Color == pos9Color)
+                    && (pos1Color == pos5Color || pos5Color == pos9Color || pos1Color == pos9Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag1:Seq.6 - 70 Points");
+                tablePoint += 70;
+            }
+
+            deuOrdered = (pos3Value == 1 && pos5Value == 2 && pos7Value == 3)
+                    || (pos3Value == 3 && pos5Value == 2 && pos7Value == 1);
+            if (!deuOrdered && (pos3Value != pos5Value && pos5Value != pos7Value && pos3Value != pos7Value)
+                    && (pos3Value == 1 || pos3Value == 2 || pos3Value == 3)
+                    && (pos5Value == 1 || pos5Value == 2 || pos5Value == 3)
+                    && (pos7Value == 1 || pos7Value == 2 || pos7Value == 3)
+                    && !(pos3Color == pos5Color && pos5Color == pos7Color)
+                    && (pos3Color == pos5Color || pos5Color == pos7Color || pos3Color == pos7Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag2:Seq.6 - 70 Points");
+                tablePoint += 70;
+            }
+
+            deuOrdered = (pos1Value == 1 && pos4Value == 2 && pos7Value == 3)
+                    || (pos1Value == 3 && pos4Value == 2 && pos7Value == 1);
+            if (!deuOrdered && (pos1Value != pos4Value && pos4Value != pos7Value && pos1Value != pos7Value)
+                    && (pos1Value == 1 || pos1Value == 2 || pos1Value == 3)
+                    && (pos4Value == 1 || pos4Value == 2 || pos4Value == 3)
+                    && (pos7Value == 1 || pos7Value == 2 || pos7Value == 3)
+                    && !(pos1Color == pos4Color && pos4Color == pos7Color)
+                    && (pos1Color == pos4Color || pos4Color == pos7Color || pos1Color == pos7Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col1:Seq.6 - 70 Points");
+                tablePoint += 70;
+            }
+
+            deuOrdered = (pos2Value == 1 && pos5Value == 2 && pos8Value == 3)
+                    || (pos2Value == 3 && pos5Value == 2 && pos8Value == 1);
+            if (!deuOrdered && (pos2Value != pos5Value && pos5Value != pos8Value && pos2Value != pos8Value)
+                    && (pos2Value == 1 || pos2Value == 2 || pos2Value == 3)
+                    && (pos5Value == 1 || pos5Value == 2 || pos5Value == 3)
+                    && (pos8Value == 1 || pos8Value == 2 || pos8Value == 3)
+                    && !(pos2Color == pos5Color && pos5Color == pos8Color)
+                    && (pos2Color == pos5Color || pos5Color == pos8Color || pos2Color == pos8Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col2:Seq.6 - 70 Points");
+                tablePoint += 70;
+            }
+
+            deuOrdered = (pos3Value == 1 && pos6Value == 2 && pos9Value == 3)
+                    || (pos3Value == 3 && pos6Value == 2 && pos9Value == 1);
+            if (!deuOrdered && (pos3Value != pos6Value && pos6Value != pos9Value && pos3Value != pos9Value)
+                    && (pos3Value == 1 || pos3Value == 2 || pos3Value == 3)
+                    && (pos6Value == 1 || pos6Value == 2 || pos6Value == 3)
+                    && (pos9Value == 1 || pos9Value == 2 || pos9Value == 3)
+                    && !(pos3Color == pos6Color && pos6Color == pos9Color)
+                    && (pos3Color == pos6Color || pos6Color == pos9Color || pos3Color == pos9Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col3:Seq.6 - 70 Points");
+                tablePoint += 70;
+            }
+            //Checking Sequence 7
+            if (pos1Value == pos2Value && pos2Value == pos3Value && pos1Color == pos2Color && pos2Color == pos3Color)
+            {
+                if (printSeq)
+                    Console.WriteLine("Row1:Seq.7 - 60 Points");
+                tablePoint += 60;
+            }
+
+            if (pos4Value == pos5Value && pos5Value == pos6Value && pos4Color == pos5Color && pos5Color == pos6Color)
+            {
+                if (printSeq)
+                    Console.WriteLine("Row2:Seq.7 - 60 Points");
+                tablePoint += 60;
+            }
+
+            if (pos7Value == pos8Value && pos8Value == pos9Value && pos7Color == pos8Color && pos8Color == pos9Color)
+            {
+                if (printSeq)
+                    Console.WriteLine("Row3:Seq.7 - 60 Points");
+                tablePoint += 60;
+            }
+
+            if (pos1Value == pos5Value && pos5Value == pos9Value && (pos1Value == 1 || pos1Value == 2 || pos1Value == 3)
+                    && pos1Color == pos5Color && pos5Color == pos9Color)
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag1:Seq.7 - 60 Points");
+                tablePoint += 60;
+            }
+
+            if (pos3Value == pos5Value && pos5Value == pos7Value && (pos3Value == 1 || pos3Value == 2 || pos3Value == 3)
+                    && pos3Color == pos5Color && pos5Color == pos7Color)
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag2:Seq.7 - 60 Points");
+                tablePoint += 60;
+            }
+
+            if (pos1Value == pos4Value && pos4Value == pos7Value && (pos1Value == 1 || pos1Value == 2 || pos1Value == 3)
+                    && pos1Color == pos4Color && pos4Color == pos7Color)
+            {
+                if (printSeq)
+                    Console.WriteLine("Col1:Seq.7 - 60 Points");
+                tablePoint += 60;
+            }
+
+            if (pos2Value == pos5Value && pos5Value == pos8Value && (pos2Value == 1 || pos2Value == 2 || pos2Value == 3)
+                    && pos2Color == pos5Color && pos5Color == pos8Color)
+            {
+                if (printSeq)
+                    Console.WriteLine("Col2:Seq.7 - 60 Points");
+                tablePoint += 60;
+            }
+
+            if (pos3Value == pos6Value && pos6Value == pos9Value && (pos3Value == 1 || pos3Value == 2 || pos3Value == 3)
+                    && pos3Color == pos6Color && pos6Color == pos9Color)
+            {
+                if (printSeq)
+                    Console.WriteLine("Col3:Seq.7 - 60 Points");
+                tablePoint += 60;
+            }
+            ///Checking Sequence 8 
+            if (pos1Value == pos2Value && pos2Value == pos3Value && pos1Color != pos2Color && pos2Color != pos3Color
+                    && pos1Color != pos3Color)
+            {
+                if (printSeq)
+                    Console.WriteLine("Row1:Seq.8 - 50 Points");
+                tablePoint += 50;
+            }
+
+            if (pos4Value == pos5Value && pos5Value == pos6Value
+                    && pos4Color != pos5Color && pos5Color != pos6Color && pos4Color != pos6Color)
+            {
+                if (printSeq)
+                    Console.WriteLine("Row2:Seq.8 - 50 Points");
+                tablePoint += 50;
+            }
+
+            if (pos7Value == pos8Value && pos8Value == pos9Value
+                    && pos7Color != pos8Color && pos8Color != pos9Color && pos7Color != pos9Color)
+            {
+                if (printSeq)
+                    Console.WriteLine("Row3:Seq.8 - 50 Points");
+                tablePoint += 50;
+            }
+
+            if (pos1Value == pos5Value && pos5Value == pos9Value
+                    && pos1Color != pos5Color && pos5Color != pos9Color && pos1Color != pos9Color)
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag1:Seq.8 - 50 Points");
+                tablePoint += 50;
+            }
+
+            if (pos3Value == pos5Value && pos5Value == pos7Value
+                    && pos3Color != pos5Color && pos5Color != pos7Color && pos3Color != pos7Color)
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag2:Seq.8 - 50 Points");
+                tablePoint += 50;
+            }
+
+            if (pos1Value == pos4Value && pos4Value == pos7Value
+                    && pos1Color != pos4Color && pos4Color != pos7Color && pos1Color != pos7Color)
+            {
+                if (printSeq)
+                    Console.WriteLine("Col1:Seq.8 - 50 Points");
+                tablePoint += 50;
+            }
+
+            if (pos2Value == pos5Value && pos5Value == pos8Value
+                    && pos2Color != pos5Color && pos5Color != pos8Color && pos2Color != pos8Color)
+            {
+                if (printSeq)
+                    Console.WriteLine("Col2:Seq.8 - 50 Points");
+                tablePoint += 50;
+            }
+
+            if (pos3Value == pos6Value && pos6Value == pos9Value
+                    && pos3Color != pos6Color && pos6Color != pos9Color && pos3Color != pos9Color)
+            {
+                if (printSeq)
+                    Console.WriteLine("Col3:Seq.8 - 50 Points");
+                tablePoint += 50;
+            }
+            //Checking Sequence 9
+            if (pos1Value == pos2Value && pos2Value == pos3Value
+                    && !(pos1Color == pos2Color && pos2Color == pos3Color)
+                    && !(pos1Color != pos2Color && pos2Color != pos3Color && pos1Color != pos3Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row1:Seq.9 - 40 Points");
+                tablePoint += 40;
+            }
+
+            if (pos4Value == pos5Value && pos5Value == pos6Value
+                    && !(pos4Color == pos5Color && pos5Color == pos6Color)
+                    && !(pos4Color != pos5Color && pos5Color != pos6Color && pos4Color != pos6Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row2:Seq.9 - 40 Points");
+                tablePoint += 40;
+            }
+
+            if (pos7Value == pos8Value && pos8Value == pos9Value
+                    && !(pos7Color == pos8Color && pos8Color == pos9Color)
+                    && !(pos7Color != pos8Color && pos8Color != pos9Color && pos7Color != pos9Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row3:Seq.9 - 40 Points");
+                tablePoint += 40;
+            }
+
+            if (pos1Value == pos5Value && pos5Value == pos9Value
+                    && !(pos1Color == pos5Color && pos5Color == pos9Color)
+                    && !(pos1Color != pos5Color && pos5Color != pos9Color && pos1Color != pos9Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag1:Seq.9 - 40 Points");
+                tablePoint += 40;
+            }
+
+            if (pos3Value == pos5Value && pos5Value == pos7Value
+                    && !(pos3Color == pos5Color && pos5Color == pos7Color)
+                    && !(pos3Color != pos5Color && pos5Color != pos7Color && pos3Color != pos7Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag2:Seq.9 - 40 Points");
+                tablePoint += 40;
+            }
+
+            if (pos1Value == pos4Value && pos4Value == pos7Value
+                    && !(pos1Color == pos4Color && pos4Color == pos7Color)
+                    && !(pos1Color != pos4Color && pos4Color != pos7Color && pos1Color != pos7Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col1:Seq.9 - 40 Points");
+                tablePoint += 40;
+            }
+
+            if (pos2Value == pos5Value && pos5Value == pos8Value
+                    && !(pos2Color == pos5Color && pos5Color == pos8Color)
+                    && !(pos2Color != pos5Color && pos5Color != pos8Color && pos2Color != pos8Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col2:Seq.9 - 40 Points");
+                tablePoint += 40;
+            }
+
+            if (pos3Value == pos6Value && pos6Value == pos9Value
+                    && !(pos3Color == pos6Color && pos6Color == pos9Color)
+                    && !(pos3Color != pos6Color && pos6Color != pos9Color && pos3Color != pos9Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col3:Seq.9 - 40 Points");
+                tablePoint += 40;
+            }
+            //Checking Sequence 10
+            if (!(pos1Value == pos2Value && pos2Value == pos3Value)
+                    && !(pos1Value != pos2Value && pos2Value != pos3Value && pos1Value != pos3Value)
+                    && (pos1Color == pos2Color && pos2Color == pos3Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row1:Seq.10 - 30 Points");
+                tablePoint += 30;
+            }
+
+            if (!(pos4Value == pos5Value && pos5Value == pos6Value)
+                    && !(pos4Value != pos5Value && pos5Value != pos6Value && pos4Value != pos6Value)
+                    && (pos4Color == pos5Color && pos5Color == pos6Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row2:Seq.10 - 30 Points");
+                tablePoint += 30;
+            }
+
+            if (!(pos7Value == pos8Value && pos8Value == pos9Value)
+                    && !(pos7Value != pos8Value && pos8Value != pos9Value && pos7Value != pos9Value)
+                    && (pos7Color == pos8Color && pos8Color == pos9Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Row3:Seq.10 - 30 Points");
+                tablePoint += 30;
+            }
+
+            if (!(pos1Value == pos5Value && pos5Value == pos9Value)
+                    && !(pos1Value != pos5Value && pos5Value != pos9Value && pos1Value != pos9Value)
+                    && (pos1Color == pos5Color && pos5Color == pos9Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag1:Seq.10 - 30 Points");
+                tablePoint += 30;
+            }
+
+            if (!(pos3Value == pos5Value && pos5Value == pos7Value)
+                    && !(pos3Value != pos5Value && pos5Value != pos7Value && pos3Value != pos7Value)
+                    && (pos3Color == pos5Color && pos5Color == pos7Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Diag2:Seq.10 - 30 Points");
+                tablePoint += 30;
+            }
+
+            if (!(pos1Value == pos4Value && pos4Value == pos7Value)
+                    && !(pos1Value != pos4Value && pos4Value != pos7Value && pos1Value != pos7Value)
+                    && (pos1Color == pos4Color && pos4Color == pos7Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col1:Seq.10 - 30 Points");
+                tablePoint += 30;
+            }
+
+            if (!(pos2Value == pos5Value && pos5Value == pos8Value)
+                    && !(pos2Value != pos5Value && pos5Value != pos8Value && pos2Value != pos8Value)
+                    && (pos2Color == pos5Color && pos5Color == pos8Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col2:Seq.10 - 30 Points");
+                tablePoint += 30;
+            }
+
+            if (!(pos3Value == pos6Value && pos6Value == pos9Value)
+                    && !(pos3Value != pos6Value && pos6Value != pos9Value && pos3Value != pos9Value)
+                    && (pos3Color == pos6Color && pos6Color == pos9Color))
+            {
+                if (printSeq)
+                    Console.WriteLine("Col3:Seq.10 - 30 Points");
+                tablePoint += 30;
+            }
+            //Checking Sequence 11
+            if (!(pos1Value == pos2Value && pos2Value == pos3Value)
+                    && !(pos1Value != pos2Value && pos2Value != pos3Value && pos1Value != pos3Value)
+                    && (pos1Color != pos2Color && pos2Color != pos3Color && pos1Color != pos3Color))
+            {
+                if (printSeq) Console.WriteLine("Row1:Seq.11 20 Points");
+                tablePoint += 20;
+            }
+
+            if (!(pos4Value == pos5Value && pos5Value == pos6Value)
+                    && !(pos4Value != pos5Value && pos5Value != pos6Value && pos4Value != pos6Value)
+                    && (pos4Color != pos5Color && pos5Color != pos6Color && pos4Color != pos6Color))
+            {
+                if (printSeq) Console.WriteLine("Row2:Seq.11 20 Points");
+                tablePoint += 20;
+            }
+
+            if (!(pos7Value == pos8Value && pos8Value == pos9Value)
+                    && !(pos7Value != pos8Value && pos8Value != pos9Value && pos7Value != pos9Value)
+                    && (pos7Color != pos8Color && pos8Color != pos9Color && pos7Color != pos9Color))
+            {
+                if (printSeq) Console.WriteLine("Row3:Seq.11 20 Points");
+                tablePoint += 20;
+            }
+
+            if (!(pos1Value == pos5Value && pos5Value == pos9Value)
+                    && !(pos1Value != pos5Value && pos5Value != pos9Value && pos1Value != pos9Value)
+                    && (pos1Color != pos5Color && pos5Color != pos9Color && pos1Color != pos9Color))
+            {
+                if (printSeq) Console.WriteLine("Diag1:Seq.11 20 Points");
+                tablePoint += 20;
+            }
+
+            if (!(pos3Value == pos5Value && pos5Value == pos7Value)
+                    && !(pos3Value != pos5Value && pos5Value != pos7Value && pos3Value != pos7Value)
+                    && (pos3Color != pos5Color && pos5Color != pos7Color && pos3Color != pos7Color))
+            {
+                if (printSeq) Console.WriteLine("Diag2:Seq.11 20 Points");
+                tablePoint += 20;
+            }
+
+            if (!(pos1Value == pos4Value && pos4Value == pos7Value)
+                    && !(pos1Value != pos4Value && pos4Value != pos7Value && pos1Value != pos7Value)
+                    && (pos1Color != pos4Color && pos4Color != pos7Color && pos1Color != pos7Color))
+            {
+                if (printSeq) Console.WriteLine("Col1:Seq.11 20 Points");
+                tablePoint += 20;
+            }
+
+            if (!(pos2Value == pos5Value && pos5Value == pos8Value)
+                    && !(pos2Value != pos5Value && pos5Value != pos8Value && pos2Value != pos8Value)
+                    && (pos2Color != pos5Color && pos5Color != pos8Color && pos2Color != pos8Color))
+            {
+                if (printSeq) Console.WriteLine("Col2:Seq.11 20 Points");
+                tablePoint += 20;
+            }
+
+            if (!(pos3Value == pos6Value && pos6Value == pos9Value)
+                    && !(pos3Value != pos6Value && pos6Value != pos9Value && pos3Value != pos9Value)
+                    && (pos3Color != pos6Color && pos6Color != pos9Color && pos3Color != pos9Color))
+            {
+                if (printSeq) Console.WriteLine("Col3:Seq.11 20 Points");
+                tablePoint += 20;
+            }
+        }
+
+        public static void computer()
+        {
+            int maxPoint = 0, maxPosition = -1, maxColor = 0, maxValue = 0;
+            Random rd = new Random();
+            printSeq = false;
+
+            for (int i = 0; i < 25; i++)
+            {
+                // Rastgele değerler oluştur
+                int tempValue = rd.Next(3) + 1;
+                int tempColor = rd.Next(3) + 1;
+                int tempPosition = rd.Next(9);
+
+                // Mevcut pozisyonu geçici olarak değiştir
+                int originalValue = 0;
+                int originalColor = 0;
+
+                switch (tempPosition)
+                {
+                    case 0:
+                        originalValue = pos1Value;
+                        originalColor = pos1Color;
+                        pos1Value = tempValue;
+                        pos1Color = tempColor;
+                        break;
+                    case 1:
+                        originalValue = pos2Value;
+                        originalColor = pos2Color;
+                        pos2Value = tempValue;
+                        pos2Color = tempColor;
+                        break;
+                    case 2:
+                        originalValue = pos3Value;
+                        originalColor = pos3Color;
+                        pos3Value = tempValue;
+                        pos3Color = tempColor;
+                        break;
+                    case 3:
+                        originalValue = pos4Value;
+                        originalColor = pos4Color;
+                        pos4Value = tempValue;
+                        pos4Color = tempColor;
+                        break;
+                    case 4:
+                        originalValue = pos5Value;
+                        originalColor = pos5Color;
+                        pos5Value = tempValue;
+                        pos5Color = tempColor;
+                        break;
+                    case 5:
+                        originalValue = pos6Value;
+                        originalColor = pos6Color;
+                        pos6Value = tempValue;
+                        pos6Color = tempColor;
+                        break;
+                    case 6:
+                        originalValue = pos7Value;
+                        originalColor = pos7Color;
+                        pos7Value = tempValue;
+                        pos7Color = tempColor;
+                        break;
+                    case 7:
+                        originalValue = pos8Value;
+                        originalColor = pos8Color;
+                        pos8Value = tempValue;
+                        pos8Color = tempColor;
+                        break;
+                    case 8:
+                        originalValue = pos9Value;
+                        originalColor = pos9Color;
+                        pos9Value = tempValue;
+                        pos9Color = tempColor;
+                        break;
+                }
+
+                // Geçici değişiklik yapıldıktan sonra puanı kontrol et
+                tablePoint = 0;
+                //checkSequences(); // Burada mevcut pozisyon değişikliği kontrol ediliyor
+
+                // En iyi puanı bul
+                if (tablePoint > maxPoint)
+                {
+                    maxPoint = tablePoint;
+                    maxPosition = tempPosition;
+                    maxColor = tempColor;
+                    maxValue = tempValue;
+                }
+
+                // Geçici değerleri geri yükle
+                switch (tempPosition)
+                {
+                    case 0:
+                        pos1Value = originalValue;
+                        pos1Color = originalColor;
+                        break;
+                    case 1:
+                        pos2Value = originalValue;
+                        pos2Color = originalColor;
+                        break;
+                    case 2:
+                        pos3Value = originalValue;
+                        pos3Color = originalColor;
+                        break;
+                    case 3:
+                        pos4Value = originalValue;
+                        pos4Color = originalColor;
+                        break;
+                    case 4:
+                        pos5Value = originalValue;
+                        pos5Color = originalColor;
+                        break;
+                    case 5:
+                        pos6Value = originalValue;
+                        pos6Color = originalColor;
+                        break;
+                    case 6:
+                        pos7Value = originalValue;
+                        pos7Color = originalColor;
+                        break;
+                    case 7:
+                        pos8Value = originalValue;
+                        pos8Color = originalColor;
+                        break;
+                    case 8:
+                        pos9Value = originalValue;
+                        pos9Color = originalColor;
+                        break;
+                }
+            }
+
+            // En iyi pozisyondaki değeri güncelle
+            if (maxPosition != -1)
+            {
+                switch (maxPosition)
+                {
+                    case 0:
+                        pos1Value = maxValue;
+                        pos1Color = maxColor;
+                        break;
+                    case 1:
+                        pos2Value = maxValue;
+                        pos2Color = maxColor;
+                        break;
+                    case 2:
+                        pos3Value = maxValue;
+                        pos3Color = maxColor;
+                        break;
+                    case 3:
+                        pos4Value = maxValue;
+                        pos4Color = maxColor;
+                        break;
+                    case 4:
+                        pos5Value = maxValue;
+                        pos5Color = maxColor;
+                        break;
+                    case 5:
+                        pos6Value = maxValue;
+                        pos6Color = maxColor;
+                        break;
+                    case 6:
+                        pos7Value = maxValue;
+                        pos7Color = maxColor;
+                        break;
+                    case 7:
+                        pos8Value = maxValue;
+                        pos8Color = maxColor;
+                        break;
+                    case 8:
+                        pos9Value = maxValue;
+                        pos9Color = maxColor;
+                        break;
+                }
+            }
+
+            printSeq = true;
+        }
+
+        public static void computer1()
+        {
+            int maxPoint = 0, maxPosition = -1, maxColor = 0, maxValue = 0;
+            Random rd = new Random();
+            printSeq = false;
+
+            for (int i = 0; i < 50; i++)
+            {
+                // Rastgele değerler oluştur
+                int tempValue = rd.Next(3) + 1;
+                int tempColor = rd.Next(3) + 1;
+                int tempPosition = rd.Next(9);
+
+                // Mevcut pozisyonu geçici olarak değiştir
+                int originalValue = 0;
+                int originalColor = 0;
+
+                switch (tempPosition)
+                {
+                    case 0:
+                        originalValue = pos1Value;
+                        originalColor = pos1Color;
+                        pos1Value = tempValue;
+                        pos1Color = tempColor;
+                        break;
+                    case 1:
+                        originalValue = pos2Value;
+                        originalColor = pos2Color;
+                        pos2Value = tempValue;
+                        pos2Color = tempColor;
+                        break;
+                    case 2:
+                        originalValue = pos3Value;
+                        originalColor = pos3Color;
+                        pos3Value = tempValue;
+                        pos3Color = tempColor;
+                        break;
+                    case 3:
+                        originalValue = pos4Value;
+                        originalColor = pos4Color;
+                        pos4Value = tempValue;
+                        pos4Color = tempColor;
+                        break;
+                    case 4:
+                        originalValue = pos5Value;
+                        originalColor = pos5Color;
+                        pos5Value = tempValue;
+                        pos5Color = tempColor;
+                        break;
+                    case 5:
+                        originalValue = pos6Value;
+                        originalColor = pos6Color;
+                        pos6Value = tempValue;
+                        pos6Color = tempColor;
+                        break;
+                    case 6:
+                        originalValue = pos7Value;
+                        originalColor = pos7Color;
+                        pos7Value = tempValue;
+                        pos7Color = tempColor;
+                        break;
+                    case 7:
+                        originalValue = pos8Value;
+                        originalColor = pos8Color;
+                        pos8Value = tempValue;
+                        pos8Color = tempColor;
+                        break;
+                    case 8:
+                        originalValue = pos9Value;
+                        originalColor = pos9Color;
+                        pos9Value = tempValue;
+                        pos9Color = tempColor;
+                        break;
+                }
+
+                // Geçici değişiklik yapıldıktan sonra puanı kontrol et
+                tablePoint = 0;
+                //checkSequences(); // Burada mevcut pozisyon değişikliği kontrol ediliyor
+
+                // En iyi puanı bul
+                if (tablePoint > maxPoint)
+                {
+                    maxPoint = tablePoint;
+                    maxPosition = tempPosition;
+                    maxColor = tempColor;
+                    maxValue = tempValue;
+                }
+
+                // Geçici değerleri geri yükle
+                switch (tempPosition)
+                {
+                    case 0:
+                        pos1Value = originalValue;
+                        pos1Color = originalColor;
+                        break;
+                    case 1:
+                        pos2Value = originalValue;
+                        pos2Color = originalColor;
+                        break;
+                    case 2:
+                        pos3Value = originalValue;
+                        pos3Color = originalColor;
+                        break;
+                    case 3:
+                        pos4Value = originalValue;
+                        pos4Color = originalColor;
+                        break;
+                    case 4:
+                        pos5Value = originalValue;
+                        pos5Color = originalColor;
+                        break;
+                    case 5:
+                        pos6Value = originalValue;
+                        pos6Color = originalColor;
+                        break;
+                    case 6:
+                        pos7Value = originalValue;
+                        pos7Color = originalColor;
+                        break;
+                    case 7:
+                        pos8Value = originalValue;
+                        pos8Color = originalColor;
+                        break;
+                    case 8:
+                        pos9Value = originalValue;
+                        pos9Color = originalColor;
+                        break;
+                }
+            }
+
+            // En iyi pozisyondaki değeri güncelle
+            if (maxPosition != -1)
+            {
+                switch (maxPosition)
+                {
+                    case 0:
+                        pos1Value = maxValue;
+                        pos1Color = maxColor;
+                        break;
+                    case 1:
+                        pos2Value = maxValue;
+                        pos2Color = maxColor;
+                        break;
+                    case 2:
+                        pos3Value = maxValue;
+                        pos3Color = maxColor;
+                        break;
+                    case 3:
+                        pos4Value = maxValue;
+                        pos4Color = maxColor;
+                        break;
+                    case 4:
+                        pos5Value = maxValue;
+                        pos5Color = maxColor;
+                        break;
+                    case 5:
+                        pos6Value = maxValue;
+                        pos6Color = maxColor;
+                        break;
+                    case 6:
+                        pos7Value = maxValue;
+                        pos7Color = maxColor;
+                        break;
+                    case 7:
+                        pos8Value = maxValue;
+                        pos8Color = maxColor;
+                        break;
+                    case 8:
+                        pos9Value = maxValue;
+                        pos9Color = maxColor;
+                        break;
+                }
+            }
+
+            printSeq = true;
+        }
+
+        public static void computer2()
+        {
+            int maxPoint = 0, maxPosition = -1, maxColor = 0, maxValue = 0;
+            Random rd = new Random();
+            printSeq = false;
+
+            for (int i = 0; i < 100; i++)
+            {
+                // Rastgele değerler oluştur
+                int tempValue = rd.Next(3) + 1;
+                int tempColor = rd.Next(3) + 1;
+                int tempPosition = rd.Next(9);
+
+                // Mevcut pozisyonu geçici olarak değiştir
+                int originalValue = 0;
+                int originalColor = 0;
+
+                switch (tempPosition)
+                {
+                    case 0:
+                        originalValue = pos1Value;
+                        originalColor = pos1Color;
+                        pos1Value = tempValue;
+                        pos1Color = tempColor;
+                        break;
+                    case 1:
+                        originalValue = pos2Value;
+                        originalColor = pos2Color;
+                        pos2Value = tempValue;
+                        pos2Color = tempColor;
+                        break;
+                    case 2:
+                        originalValue = pos3Value;
+                        originalColor = pos3Color;
+                        pos3Value = tempValue;
+                        pos3Color = tempColor;
+                        break;
+                    case 3:
+                        originalValue = pos4Value;
+                        originalColor = pos4Color;
+                        pos4Value = tempValue;
+                        pos4Color = tempColor;
+                        break;
+                    case 4:
+                        originalValue = pos5Value;
+                        originalColor = pos5Color;
+                        pos5Value = tempValue;
+                        pos5Color = tempColor;
+                        break;
+                    case 5:
+                        originalValue = pos6Value;
+                        originalColor = pos6Color;
+                        pos6Value = tempValue;
+                        pos6Color = tempColor;
+                        break;
+                    case 6:
+                        originalValue = pos7Value;
+                        originalColor = pos7Color;
+                        pos7Value = tempValue;
+                        pos7Color = tempColor;
+                        break;
+                    case 7:
+                        originalValue = pos8Value;
+                        originalColor = pos8Color;
+                        pos8Value = tempValue;
+                        pos8Color = tempColor;
+                        break;
+                    case 8:
+                        originalValue = pos9Value;
+                        originalColor = pos9Color;
+                        pos9Value = tempValue;
+                        pos9Color = tempColor;
+                        break;
+                }
+
+                // Geçici değişiklik yapıldıktan sonra puanı kontrol et
+                tablePoint = 0;
+                //checkSequences(); // Burada mevcut pozisyon değişikliği kontrol ediliyor
+
+                // En iyi puanı bul
+                if (tablePoint > maxPoint)
+                {
+                    maxPoint = tablePoint;
+                    maxPosition = tempPosition;
+                    maxColor = tempColor;
+                    maxValue = tempValue;
+                }
+
+                // Geçici değerleri geri yükle
+                switch (tempPosition)
+                {
+                    case 0:
+                        pos1Value = originalValue;
+                        pos1Color = originalColor;
+                        break;
+                    case 1:
+                        pos2Value = originalValue;
+                        pos2Color = originalColor;
+                        break;
+                    case 2:
+                        pos3Value = originalValue;
+                        pos3Color = originalColor;
+                        break;
+                    case 3:
+                        pos4Value = originalValue;
+                        pos4Color = originalColor;
+                        break;
+                    case 4:
+                        pos5Value = originalValue;
+                        pos5Color = originalColor;
+                        break;
+                    case 5:
+                        pos6Value = originalValue;
+                        pos6Color = originalColor;
+                        break;
+                    case 6:
+                        pos7Value = originalValue;
+                        pos7Color = originalColor;
+                        break;
+                    case 7:
+                        pos8Value = originalValue;
+                        pos8Color = originalColor;
+                        break;
+                    case 8:
+                        pos9Value = originalValue;
+                        pos9Color = originalColor;
+                        break;
+                }
+            }
+
+            // En iyi pozisyondaki değeri güncelle
+            if (maxPosition != -1)
+            {
+                switch (maxPosition)
+                {
+                    case 0:
+                        pos1Value = maxValue;
+                        pos1Color = maxColor;
+                        break;
+                    case 1:
+                        pos2Value = maxValue;
+                        pos2Color = maxColor;
+                        break;
+                    case 2:
+                        pos3Value = maxValue;
+                        pos3Color = maxColor;
+                        break;
+                    case 3:
+                        pos4Value = maxValue;
+                        pos4Color = maxColor;
+                        break;
+                    case 4:
+                        pos5Value = maxValue;
+                        pos5Color = maxColor;
+                        break;
+                    case 5:
+                        pos6Value = maxValue;
+                        pos6Color = maxColor;
+                        break;
+                    case 6:
+                        pos7Value = maxValue;
+                        pos7Color = maxColor;
+                        break;
+                    case 7:
+                        pos8Value = maxValue;
+                        pos8Color = maxColor;
+                        break;
+                    case 8:
+                        pos9Value = maxValue;
+                        pos9Color = maxColor;
+                        break;
+                }
+            }
+
+            printSeq = true;
+        }
+
+        public static void Main(string[] args)
+    {
+            Random rand = new Random();
+            Console.WriteLine("Game Mode:");
+            Console.WriteLine("");
+            Console.WriteLine("1.Easy");
+            Console.WriteLine("2.Moderate");
+            Console.WriteLine("3.Hard");
+            Console.WriteLine("");
+
+
+            int value = 0;
+            int gameMode = Convert.ToInt32(Console.ReadLine());
+            switch (gameMode)
+            {
+                case 1:
+                    value = easy;
+                    Console.WriteLine("Enter game mode: Easy");
+                    Console.WriteLine("");
+                    computer();
+                    break;
+                case 2:
+                    value = medium;
+                    Console.WriteLine("Enter game mode: Medium");
+                    Console.WriteLine("");
+                    computer1();
+                    break;
+                case 3:
+                    value = hard;
+                    Console.WriteLine("Enter game mode: Hard");
+                    Console.WriteLine("");
+                    computer2();
+                    break;
+            }
+
+
+            printRandom();
+
+            for (int i = 0; i < 5; i++)
+        {
+
+                Console.WriteLine("Round " + (i + 1) + ": " + "User's Turn");
+            Console.WriteLine("   1 2 3");
+            Console.WriteLine(" +--------+");
+            printValue();
+            Console.WriteLine(" +--------+");
+                Console.WriteLine("");
+                getInput();
+            CheckSequences();
+
+            userPoint += tablePoint;
+            tablePoint = 0;
+
+            Console.WriteLine("   1 2 3");
+            Console.WriteLine(" +--------+");
+            printValue();
+            Console.WriteLine(" +--------+");
+                Console.WriteLine("");
+
+                printRandom();
+            Console.WriteLine("Shuffled Board:");
+            Console.WriteLine("   1 2 3");
+            Console.WriteLine(" +--------+");
+            printValue();
+            Console.WriteLine(" +--------+");
+                Console.WriteLine("");
+                Console.WriteLine("Round " + (i + 1) + ": " + "Computer's Turn");
+
+                //Computer.computer2();
+                Console.WriteLine("   1 2 3");
+            Console.WriteLine(" +--------+");
+            printValue();
+            Console.WriteLine(" +--------+");
+                Console.WriteLine("");
+                CheckSequences();
+
+                computerPoint += tablePoint;
+            tablePoint = 0;
+            printRandom();
+        }
+
+            if (userPoint > computerPoint)
+        {
+            Console.WriteLine("");
+                Console.WriteLine("");
+                Console.WriteLine("Y       Y     OOOOO     U       U       W       W       I       N       N\r\n Y     Y    O       O   U       U       W       W       I       N N     N\r\n   Y Y     O         O  U       U       W   W   W       I       N   N   N\r\n    Y      O         O  U       U       W W   W W       I       N     N N\r\n    Y      O         O  U       U       W       W       I       N       N\r\n    Y       O       O    U     U        W       W       I       N       N\r\n    Y         OOOOO       UUUUU         W       W       I       N       N");
+                Console.WriteLine("");
+                Console.WriteLine(""); 
+                Console.WriteLine("User's Point: " + userPoint);
+            Console.WriteLine("Computer's Point: " + computerPoint);
+
+            }
+        else {
+                Console.WriteLine("");
+                Console.WriteLine("");
+                Console.WriteLine("Y       Y     OOOOO     U       U       L           OOOOO      SSSSS     EEEEE\r\n Y     Y    O       O   U       U       L         O       O   S       S   E\r\n   Y Y     O         O  U       U       L        O           S           E\r\n    Y      O         O  U       U       L        O             SSSSS     EEEE\r\n    Y      O         O  U       U       L        O                   S   E\r\n    Y       O       O    U     U        L         O       O   S       S   E\r\n    Y         OOOOO       UUUUU         LLLLLLL     OOOOO      SSSSS     EEEEE\r\n");
+                Console.WriteLine("");
+                Console.WriteLine(""); 
+                Console.WriteLine("User's Point: " + userPoint);
+            Console.WriteLine("Computer's Point: " + computerPoint);
+        }
+
+    }
+}
+}
+
+
+
+
