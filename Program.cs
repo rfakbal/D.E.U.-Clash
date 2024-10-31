@@ -4,8 +4,42 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public class Program
 {
+
     public static void Main()
     {
+        int easy, medium, hard;
+    Console.WriteLine("Game Mode:");
+            Console.WriteLine("");
+            Console.WriteLine("1.Easy");
+            Console.WriteLine("2.Moderate");
+            Console.WriteLine("3.Hard");
+            Console.WriteLine("");
+
+
+            int value = 0;
+            int gameMode = Convert.ToInt32(Console.ReadLine());
+            switch (gameMode)
+            {
+                case 1:
+                    value = easy;
+                    Console.WriteLine("Enter game mode: Easy");
+                    Console.WriteLine("");
+                    computer();
+                    break;
+                case 2:
+                    value = medium;
+                    Console.WriteLine("Enter game mode: Medium");
+                    Console.WriteLine("");
+                    computer1();
+                    break;
+                case 3:
+                    value = hard;
+                    Console.WriteLine("Enter game mode: Hard");
+                    Console.WriteLine("");
+                    computer2();
+                    break;
+            }
+
         int pos1Value, pos2Value, pos3Value, pos4Value, pos5Value,// for each position (1-9) 
             pos6Value, pos7Value, pos8Value, pos9Value, pos1Color, // there exist 2 variables its color(RGB) 
             pos2Color, pos3Color, pos4Color, pos5Color, pos6Color, // and its letter value (DEU)
@@ -1272,6 +1306,26 @@ public class Program
                 pos9Color = inputColor;
                 break;
         }
+        if (userPoint > computerPoint)
+        {
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("Y       Y     OOOOO     U       U       W       W       I       N       N\r\n Y     Y    O       O   U       U       W       W       I       N N     N\r\n   Y Y     O         O  U       U       W   W   W       I       N   N   N\r\n    Y      O         O  U       U       W W   W W       I       N     N N\r\n    Y      O         O  U       U       W       W       I       N       N\r\n    Y       O       O    U     U        W       W       I       N       N\r\n    Y         OOOOO       UUUUU         W       W       I       N       N");
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("User's Point: " + userPoint);
+            Console.WriteLine("Computer's Point: " + computerPoint);
 
+        }
+        else
+        {
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("Y       Y     OOOOO     U       U       L           OOOOO      SSSSS     EEEEE\r\n Y     Y    O       O   U       U       L         O       O   S       S   E\r\n   Y Y     O         O  U       U       L        O           S           E\r\n    Y      O         O  U       U       L        O             SSSSS     EEEE\r\n    Y      O         O  U       U       L        O                   S   E\r\n    Y       O       O    U     U        L         O       O   S       S   E\r\n    Y         OOOOO       UUUUU         LLLLLLL     OOOOO      SSSSS     EEEEE\r\n");
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("User's Point: " + userPoint);
+            Console.WriteLine("Computer's Point: " + computerPoint);
+        }
     }
 }
