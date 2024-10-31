@@ -21,7 +21,7 @@ public class Program
         // 3 stands for U and Blue
         // For example 1,1 -> Red D, 2,1 -> Green E
 
-        Random rand = new Random();
+        Random rand = new Random(); //Random Objects Created
 
         pos1Value = rand.Next(3) + 1;
         pos1Color = rand.Next(3) + 1;
