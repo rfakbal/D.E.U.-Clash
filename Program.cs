@@ -14,7 +14,7 @@ public class Program
         int userPoint = 0; // user and computer points stored in userPoint, computerPoint
         int computerPoint = 0;
         int tablePoint = 0;  // table point refers to the point that current board holds
-        bool printSeq = true;
+        bool printSeq = true;// setting for default
 
         // 1 stands for D and Red
         // 2 stands for E and Green
