@@ -21,6 +21,12 @@ public class Program
         int tablePoint = 0;  // table point refers to the point that current board holds
         bool printSeq = true;// setting for default
         bool deuOrdered; // used in sequence checking, stated that if the row other column has deu letters ordered
+        int tempValue = 0;
+        int tempColor = 0;
+        int tempPosition = 0;
+        // Creating temp values
+        int originalValue = 0;
+        int originalColor = 0;
         Random rand = new Random();
         Console.WriteLine("Game Mode:");
         Console.WriteLine("");
@@ -292,8 +298,6 @@ public class Program
                                 break;
                         }
                     }
-                    computerPoint += maxPoint;
-                    maxPoint = 0;
                     printSeq = true;
                 }
                 if (i == -1)
@@ -302,6 +306,86 @@ public class Program
                     secLoop = 1001;
                 }
 
+                if (i % 2 != 0 && secLoop < 1001 && i != -1)
+                {
+                    // Code block of the Computer move
+                    Random rd = new Random();
+                    printSeq = false;
+                    // Assigning random values
+                    tempValue = rd.Next(3) + 1;
+                    tempColor = rd.Next(3) + 1;
+                    tempPosition = rd.Next(9);
+                    // Creating temp values
+                    originalValue = 0;
+                    originalColor = 0;
+
+                    switch (tempPosition)
+                    {
+                        case 0:
+                            //Console.WriteLine(1);
+                            originalValue = pos1Value;
+                            originalColor = pos1Color;
+                            pos1Value = tempValue;
+                            pos1Color = tempColor;
+                            break;
+                        case 1:
+                            //Console.WriteLine(2);
+                            originalValue = pos2Value;
+                            originalColor = pos2Color;
+                            pos2Value = tempValue;
+                            pos2Color = tempColor;
+                            break;
+                        case 2:
+                            //Console.WriteLine(3);
+                            originalValue = pos3Value;
+                            originalColor = pos3Color;
+                            pos3Value = tempValue;
+                            pos3Color = tempColor;
+                            break;
+                        case 3:
+                            //Console.WriteLine(4);
+                            originalValue = pos4Value;
+                            originalColor = pos4Color;
+                            pos4Value = tempValue;
+                            pos4Color = tempColor;
+                            break;
+                        case 4:
+                            //Console.WriteLine(5);
+                            originalValue = pos5Value;
+                            originalColor = pos5Color;
+                            pos5Value = tempValue;
+                            pos5Color = tempColor;
+                            break;
+                        case 5:
+                            //Console.WriteLine(6);
+                            originalValue = pos6Value;
+                            originalColor = pos6Color;
+                            pos6Value = tempValue;
+                            pos6Color = tempColor;
+                            break;
+                        case 6:
+                            //Console.WriteLine(7);
+                            originalValue = pos7Value;
+                            originalColor = pos7Color;
+                            pos7Value = tempValue;
+                            pos7Color = tempColor;
+                            break;
+                        case 7:
+                            //Console.WriteLine(8);
+                            originalValue = pos8Value;
+                            originalColor = pos8Color;
+                            pos8Value = tempValue;
+                            pos8Color = tempColor;
+                            break;
+                        case 8:
+                            //Console.WriteLine(9);
+                            originalValue = pos9Value;
+                            originalColor = pos9Color;
+                            pos9Value = tempValue;
+                            pos9Color = tempColor;
+                            break;
+                    }
+                }
                 // Determining point by checking sequences
 
                 //Checking Sequence 1 
@@ -1189,16 +1273,23 @@ public class Program
                     if (printSeq) Console.WriteLine("Col3:Seq.11 20 Points");
                     tablePoint += 20;
                 }
-
+                Console.WriteLine("TABLEPOINT: : : : :" + tablePoint);
                 if (i == -1)
                 {
                     userPoint += tablePoint;
                     computerPoint += tablePoint;
                     tablePoint = 0;
                 }
-
+                if (secLoop == 1000)
+                {
+                    maxPoint = tablePoint;
+                    Console.WriteLine(" COMPUTER Point ADDEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD" + maxPoint);
+                    computerPoint += maxPoint;
+                    maxPoint = 0;
+                }
                 if (i % 2 == 0 && i != -1)
                 {
+                    Console.WriteLine(" USER Point ADDEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD" + tablePoint);
                     secLoop = 1001;
                     userPoint += tablePoint;
                     tablePoint = 0;
@@ -1210,83 +1301,6 @@ public class Program
                 }
                 if (i % 2 != 0 && secLoop < 1001 && i != -1)
                 {
-                    // Code block of the Computer move
-                    Random rd = new Random();
-                    printSeq = false;
-                    // Assigning random values
-                    int tempValue = rd.Next(3) + 1;
-                    int tempColor = rd.Next(3) + 1;
-                    int tempPosition = rd.Next(9);
-                    // Creating temp values
-                    int originalValue = 0;
-                    int originalColor = 0;
-
-                    switch (tempPosition)
-                    {
-                        case 0:
-                            //Console.WriteLine(1);
-                            originalValue = pos1Value;
-                            originalColor = pos1Color;
-                            pos1Value = tempValue;
-                            pos1Color = tempColor;
-                            break;
-                        case 1:
-                            //Console.WriteLine(2);
-                            originalValue = pos2Value;
-                            originalColor = pos2Color;
-                            pos2Value = tempValue;
-                            pos2Color = tempColor;
-                            break;
-                        case 2:
-                            //Console.WriteLine(3);
-                            originalValue = pos3Value;
-                            originalColor = pos3Color;
-                            pos3Value = tempValue;
-                            pos3Color = tempColor;
-                            break;
-                        case 3:
-                            //Console.WriteLine(4);
-                            originalValue = pos4Value;
-                            originalColor = pos4Color;
-                            pos4Value = tempValue;
-                            pos4Color = tempColor;
-                            break;
-                        case 4:
-                            //Console.WriteLine(5);
-                            originalValue = pos5Value;
-                            originalColor = pos5Color;
-                            pos5Value = tempValue;
-                            pos5Color = tempColor;
-                            break;
-                        case 5:
-                            //Console.WriteLine(6);
-                            originalValue = pos6Value;
-                            originalColor = pos6Color;
-                            pos6Value = tempValue;
-                            pos6Color = tempColor;
-                            break;
-                        case 6:
-                            //Console.WriteLine(7);
-                            originalValue = pos7Value;
-                            originalColor = pos7Color;
-                            pos7Value = tempValue;
-                            pos7Color = tempColor;
-                            break;
-                        case 7:
-                            //Console.WriteLine(8);
-                            originalValue = pos8Value;
-                            originalColor = pos8Color;
-                            pos8Value = tempValue;
-                            pos8Color = tempColor;
-                            break;
-                        case 8:
-                            //Console.WriteLine(9);
-                            originalValue = pos9Value;
-                            originalColor = pos9Color;
-                            pos9Value = tempValue;
-                            pos9Color = tempColor;
-                            break;
-                    }
                     // depending on the values, updating the maxPoint
                     if (tablePoint > maxPoint)
                     {
