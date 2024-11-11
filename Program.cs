@@ -38,15 +38,15 @@ public class Program
 
         int difInput = Convert.ToInt32(Console.ReadLine());
 
-        if (n == 1)
+        if (difInput == 1)
         {
             computerMode = 25;
         }
-        else if (n == 2)
+        else if (difInput == 2)
         {
             computerMode = 50;
         }
-        else if (n == 3) {
+        else if (difInput == 3) {
             computerMode = 100;
         }
         pos1Value = rand.Next(3) + 1;
