@@ -36,7 +36,7 @@ public class Program
         Console.WriteLine("3.Hard");
         Console.WriteLine("");
 
-        int n = Convert.ToInt32(Console.ReadLine());
+        int difInput = Convert.ToInt32(Console.ReadLine());
 
         if (n == 1)
         {
