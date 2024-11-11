@@ -21,6 +21,7 @@ public class Program
         int tablePoint = 0;  // table point refers to the point that current board holds
         bool printSeq = true;// setting for default
         bool deuOrdered; // used in sequence checking, stated that if the row other column has deu letters ordered
+        int computerMode;
         Random rand = new Random();
         Console.WriteLine("Game Mode:");
         Console.WriteLine("");
@@ -29,7 +30,19 @@ public class Program
         Console.WriteLine("3.Hard");
         Console.WriteLine("");
 
+        int n = Convert.ToInt32(Console.ReadLine());
 
+        if (n == 1)
+        {
+            computerMode = 25;
+        }
+        else if (n == 2)
+        {
+            computerMode = 50;
+        }
+        else if (n == 3) {
+            computerMode = 100;
+        }
         pos1Value = rand.Next(3) + 1;
         pos1Color = rand.Next(3) + 1;
 
