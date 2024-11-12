@@ -28,6 +28,7 @@ public class Program
         int originalValue = 0;
         int originalColor = 0;
         int computerMode = 0;
+        bool pointUnderZero = true;
         Random rand = new Random();
         Console.WriteLine("Game Mode:");
         Console.WriteLine("");
@@ -77,7 +78,7 @@ public class Program
         pos9Value = rand.Next(3) + 1;
         pos9Color = rand.Next(3) + 1;
 
-        for (int i = -1; i < 10; i++)
+        for (int i = -1; i < 10 && pointUnderZero; i++)
         {
             if (i == (-1))
             {
@@ -1602,16 +1603,26 @@ public class Program
                 }
                 if (secLoop == computerMode)
                 {
+                    if (computerPoint <= 0)
+                    {
+                        pointUnderZero = false;
+                        computerPoint = 0;
+                    }
                     maxPoint = tablePoint;
-                    //Console.WriteLine(" COMPUTER Point ADDED" + maxPoint);
-                    computerPoint += maxPoint;
+                    //Console.WriteLine(" COMPUTER Point ADDED" + maxPoint
+                    computerPoint += maxPoint-10; // subtracting the cost of the movement
                     maxPoint = 0;
                 }
                 if (i % 2 == 0 && i != -1)
                 {
                     //Console.WriteLine(" USER Point ADDED" + tablePoint);
                     secLoop = computerMode+1;
-                    userPoint += tablePoint;
+                    if(userPoint <= 0)
+                    {
+                        pointUnderZero = false;
+                        userPoint = 0;
+                    }
+                    userPoint += tablePoint-10; // subtracting the cost of the movement
                     tablePoint = 0;
                     Console.WriteLine();
                     maxPoint = 0;
