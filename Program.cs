@@ -27,7 +27,7 @@ public class Program
         // Creating temp values
         int originalValue = 0;
         int originalColor = 0;
-        int computerMode;
+        int computerMode = 0;
         Random rand = new Random();
         Console.WriteLine("Game Mode:");
         Console.WriteLine("");
@@ -46,7 +46,8 @@ public class Program
         {
             computerMode = 50;
         }
-        else if (difInput == 3) {
+        else if (difInput == 3)
+        {
             computerMode = 100;
         }
         pos1Value = rand.Next(3) + 1;
@@ -78,7 +79,24 @@ public class Program
 
         for (int i = -1; i < 10; i++)
         {
-
+            if (i == (-1))
+            {
+                Console.WriteLine();
+                Console.WriteLine("###############" + " Initial Board " + "###############");
+                Console.WriteLine();
+            }
+            if (i%2==0 && i!=-1)
+            {
+                Console.WriteLine();
+                Console.WriteLine("###############"+ " Round: " + ((i / 2) + 1) + " User's Turn "+"###############");
+                Console.WriteLine();
+            }
+            if(i%2!=0 && i != -1)
+            {
+                Console.WriteLine();
+                Console.WriteLine("###############" + " Round: " + ((i / 2) + 1) + " Computer's Turn " + "###############");
+                Console.WriteLine();
+            }
             Console.WriteLine("   1 2 3");
             Console.WriteLine(" +--------+");
             for (int j = 0; j < 3; j++)
@@ -194,12 +212,10 @@ public class Program
                 Console.WriteLine(" |");
             }
             Console.WriteLine(" +--------+");
-            Console.WriteLine("");
-            Console.WriteLine(userPoint);
-            Console.WriteLine(computerPoint);
+            Console.WriteLine();
             int maxPoint = 0, maxPosition = -1, maxColor = 0, maxValue = 0;
             int secLoop = 0;
-            for (; secLoop < 1001; secLoop++)
+            for (; secLoop < computerMode+1; secLoop++)
             {
                 if (i % 2 == 0)
                 {
@@ -254,72 +270,360 @@ public class Program
                             Console.WriteLine("Invalid position.");
                             break;
                     }
+                    Console.WriteLine("   1 2 3");
+                    Console.WriteLine(" +--------+");
+                    for (int j = 0; j < 3; j++)
+                    {
+                        Console.Write((j + 1) + "| ");
+                        for (int k = 0; k < 3; k++)
+                        {
+                            int posIndex = j * 3 + k;
+                            int value, color = 0;
+                            switch (posIndex)
+                            {
+                                case 0:
+                                    value = pos1Value;
+                                    color = pos1Color;
+                                    break;
+                                case 1:
+                                    value = pos2Value;
+                                    color = pos2Color;
+                                    break;
+                                case 2:
+                                    value = pos3Value;
+                                    color = pos3Color;
+                                    break;
+                                case 3:
+                                    value = pos4Value;
+                                    color = pos4Color;
+                                    break;
+                                case 4:
+                                    value = pos5Value;
+                                    color = pos5Color;
+                                    break;
+                                case 5:
+                                    value = pos6Value;
+                                    color = pos6Color;
+                                    break;
+                                case 6:
+                                    value = pos7Value;
+                                    color = pos7Color;
+                                    break;
+                                case 7:
+                                    value = pos8Value;
+                                    color = pos8Color;
+                                    break;
+                                case 8:
+                                    value = pos9Value;
+                                    color = pos9Color;
+                                    break;
+                                default:
+                                    value = -1;
+                                    color = -1;
+                                    break;
+                            }
+
+                            string displayChar = "";
+                            if (value == 1)
+                            { // D
+                                if (color == 1)
+                                {
+                                    displayChar = "D ";
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                }
+                                else if (color == 2)
+                                {
+                                    displayChar = "D ";
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                }
+                                else if (color == 3)
+                                {
+                                    displayChar = "D ";
+                                    Console.ForegroundColor = ConsoleColor.Blue;
+                                }
+                            }
+                            else if (value == 2)
+                            { // E
+                                if (color == 1)
+                                {
+                                    displayChar = "E ";
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                }
+                                else if (color == 2)
+                                {
+                                    displayChar = "E ";
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                }
+                                else if (color == 3)
+                                {
+                                    displayChar = "E ";
+                                    Console.ForegroundColor = ConsoleColor.Blue;
+                                }
+                            }
+                            else if (value == 3)
+                            { // U
+                                if (color == 1)
+                                {
+                                    displayChar = "U ";
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                }
+                                else if (color == 2)
+                                {
+                                    displayChar = "U ";
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                }
+                                else if (color == 3)
+                                {
+                                    displayChar = "U ";
+                                    Console.ForegroundColor = ConsoleColor.Blue;
+                                }
+                            }
+
+                            Console.Write(displayChar);
+                        }
+                        Console.ResetColor();
+                        Console.WriteLine(" |");
+                    }
+                    Console.WriteLine(" +--------+");
+                    Console.WriteLine();
                 }
-                if (secLoop == 1000)
+                if (secLoop == computerMode)
                 {
-                    Console.WriteLine("COMPUTER PLAYED: ");
-                    Console.WriteLine(maxValue + " " + maxColor);
+                    string displayChar2 = "";
+                    Console.Write("Computer Changed: ");
+                    if (maxValue == 1)
+                    {
+                        if (maxColor == 1)
+                        {
+                            displayChar2 = "Position: " + (maxPosition + 1) + " Letter: D ";
+                            Console.ForegroundColor = ConsoleColor.Red;
+                        }
+                        else if (maxColor == 2)
+                        {
+                            displayChar2 = "Position: "+ (maxPosition + 1) + " Letter: D ";
+                            Console.ForegroundColor = ConsoleColor.Green;
+                        }
+                        else if (maxColor == 3)
+                        {
+                            displayChar2 = "Position: " + (maxPosition + 1) + " Letter: D ";
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                        }
+                    }
+                    else if (maxValue == 2)
+                    {
+                        if (maxColor == 1)
+                        {
+                            displayChar2 = "Position: " + (maxPosition + 1) + " Letter: E ";
+                            Console.ForegroundColor = ConsoleColor.Red;
+                        }
+                        else if (maxColor == 2)
+                        {
+                            displayChar2 = "Position: " + (maxPosition+1) + " Letter: E ";
+                            Console.ForegroundColor = ConsoleColor.Green;
+                        }
+                        else if (maxColor == 3)
+                        {
+                            displayChar2 = "Position: " + (maxPosition+1) + " Letter: E ";
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                        }
+                    }
+                    else if (maxValue == 3)
+                    {
+                        if (maxColor == 1)
+                        {
+                            displayChar2 = "Position: " + (maxPosition+1) + " Letter: U ";
+                            Console.ForegroundColor = ConsoleColor.Red;
+                        }
+                        else if (maxColor == 2)
+                        {
+                            displayChar2 = "Position: " + (maxPosition+1) + " Letter: U ";
+                            Console.ForegroundColor = ConsoleColor.Green;
+                        }
+                        else if (maxColor == 3)
+                        {
+                            displayChar2 = "Position: " + (maxPosition+1) + " Letter: U ";
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                        }
+                    }
+                    Console.WriteLine(displayChar2);
+                    Console.ResetColor();
                     // updating the best scenario
                     if (maxPosition != -1)
                     {
                         switch (maxPosition)
                         {
                             case 0:
-                                Console.WriteLine(1);
+                                //Console.WriteLine(1);
                                 pos1Value = maxValue;
                                 pos1Color = maxColor;
                                 break;
                             case 1:
-                                Console.WriteLine(2);
+                                //Console.WriteLine(2);
                                 pos2Value = maxValue;
                                 pos2Color = maxColor;
                                 break;
                             case 2:
-                                Console.WriteLine(3);
+                                //Console.WriteLine(3);
                                 pos3Value = maxValue;
                                 pos3Color = maxColor;
                                 break;
                             case 3:
-                                Console.WriteLine(4);
+                                //Console.WriteLine(4);
                                 pos4Value = maxValue;
                                 pos4Color = maxColor;
                                 break;
                             case 4:
-                                Console.WriteLine(5);
+                                //Console.WriteLine(5);
                                 pos5Value = maxValue;
                                 pos5Color = maxColor;
                                 break;
                             case 5:
-                                Console.WriteLine(6);
+                                //Console.WriteLine(6);
                                 pos6Value = maxValue;
                                 pos6Color = maxColor;
                                 break;
                             case 6:
-                                Console.WriteLine(7);
+                                //Console.WriteLine(7);
                                 pos7Value = maxValue;
                                 pos7Color = maxColor;
                                 break;
                             case 7:
-                                Console.WriteLine(8);
+                                //Console.WriteLine(8);
                                 pos8Value = maxValue;
                                 pos8Color = maxColor;
                                 break;
                             case 8:
-                                Console.WriteLine(9);
+                                //Console.WriteLine(9);
                                 pos9Value = maxValue;
                                 pos9Color = maxColor;
                                 break;
                         }
                     }
+                    Console.WriteLine("   1 2 3");
+                    Console.WriteLine(" +--------+");
+                    for (int j = 0; j < 3; j++)
+                    {
+                        Console.Write((j + 1) + "| ");
+                        for (int k = 0; k < 3; k++)
+                        {
+                            int posIndex = j * 3 + k;
+                            int value, color = 0;
+                            switch (posIndex)
+                            {
+                                case 0:
+                                    value = pos1Value;
+                                    color = pos1Color;
+                                    break;
+                                case 1:
+                                    value = pos2Value;
+                                    color = pos2Color;
+                                    break;
+                                case 2:
+                                    value = pos3Value;
+                                    color = pos3Color;
+                                    break;
+                                case 3:
+                                    value = pos4Value;
+                                    color = pos4Color;
+                                    break;
+                                case 4:
+                                    value = pos5Value;
+                                    color = pos5Color;
+                                    break;
+                                case 5:
+                                    value = pos6Value;
+                                    color = pos6Color;
+                                    break;
+                                case 6:
+                                    value = pos7Value;
+                                    color = pos7Color;
+                                    break;
+                                case 7:
+                                    value = pos8Value;
+                                    color = pos8Color;
+                                    break;
+                                case 8:
+                                    value = pos9Value;
+                                    color = pos9Color;
+                                    break;
+                                default:
+                                    value = -1;
+                                    color = -1;
+                                    break;
+                            }
+
+                            string displayChar = "";
+                            if (value == 1)
+                            { // D
+                                if (color == 1)
+                                {
+                                    displayChar = "D ";
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                }
+                                else if (color == 2)
+                                {
+                                    displayChar = "D ";
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                }
+                                else if (color == 3)
+                                {
+                                    displayChar = "D ";
+                                    Console.ForegroundColor = ConsoleColor.Blue;
+                                }
+                            }
+                            else if (value == 2)
+                            { // E
+                                if (color == 1)
+                                {
+                                    displayChar = "E ";
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                }
+                                else if (color == 2)
+                                {
+                                    displayChar = "E ";
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                }
+                                else if (color == 3)
+                                {
+                                    displayChar = "E ";
+                                    Console.ForegroundColor = ConsoleColor.Blue;
+                                }
+                            }
+                            else if (value == 3)
+                            { // U
+                                if (color == 1)
+                                {
+                                    displayChar = "U ";
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                }
+                                else if (color == 2)
+                                {
+                                    displayChar = "U ";
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                }
+                                else if (color == 3)
+                                {
+                                    displayChar = "U ";
+                                    Console.ForegroundColor = ConsoleColor.Blue;
+                                }
+                            }
+
+                            Console.Write(displayChar);
+                        }
+                        Console.ResetColor();
+                        Console.WriteLine(" |");
+                    }
+                    Console.WriteLine(" +--------+");
+                    Console.WriteLine();
                     printSeq = true;
                 }
                 if (i == -1)
                 {
                     printSeq = true;
-                    secLoop = 1001;
+                    secLoop = computerMode+1;
                 }
 
-                if (i % 2 != 0 && secLoop < 1001 && i != -1)
+                if (i % 2 != 0 && secLoop < computerMode+1 && i != -1)
                 {
                     // Code block of the Computer move
                     Random rd = new Random();
@@ -400,7 +704,10 @@ public class Program
                     }
                 }
                 // Determining point by checking sequences
-
+                if (secLoop == computerMode)
+                {
+                    printSeq = true;
+                }
                 //Checking Sequence 1 
                 if ((pos1Value == 1 && pos2Value == 2 && pos3Value == 3 && (pos1Color == pos2Color && pos2Color == pos3Color))
                         || (pos1Value == 3 && pos2Value == 2 && pos3Value == 1
@@ -1286,33 +1593,33 @@ public class Program
                     if (printSeq) Console.WriteLine("Col3:Seq.11 20 Points");
                     tablePoint += 20;
                 }
-                Console.WriteLine("TABLEPOINT: : : : :" + tablePoint);
+                //Console.WriteLine("TABLEPOINT: : : : :" + tablePoint);
                 if (i == -1)
                 {
                     userPoint += tablePoint;
                     computerPoint += tablePoint;
                     tablePoint = 0;
                 }
-                if (secLoop == 1000)
+                if (secLoop == computerMode)
                 {
                     maxPoint = tablePoint;
-                    Console.WriteLine(" COMPUTER Point ADDEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD" + maxPoint);
+                    //Console.WriteLine(" COMPUTER Point ADDED" + maxPoint);
                     computerPoint += maxPoint;
                     maxPoint = 0;
                 }
                 if (i % 2 == 0 && i != -1)
                 {
-                    Console.WriteLine(" USER Point ADDEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD" + tablePoint);
-                    secLoop = 1001;
+                    //Console.WriteLine(" USER Point ADDED" + tablePoint);
+                    secLoop = computerMode+1;
                     userPoint += tablePoint;
                     tablePoint = 0;
-                    Console.WriteLine("");
+                    Console.WriteLine();
                     maxPoint = 0;
                     maxColor = 0;
                     maxPosition = -1;
                     maxValue = 0;
                 }
-                if (i % 2 != 0 && secLoop < 1001 && i != -1)
+                if (i % 2 != 0 && secLoop < computerMode+1 && i != -1)
                 {
                     // depending on the values, updating the maxPoint
                     if (tablePoint > maxPoint)
@@ -1366,123 +1673,9 @@ public class Program
                     }
                 }
             }
-
-            Console.WriteLine("   1 2 3");
-            Console.WriteLine(" +--------+");
-            for (int j = 0; j < 3; j++)
-            {
-                Console.Write((j + 1) + "| ");
-                for (int k = 0; k < 3; k++)
-                {
-                    int posIndex = j * 3 + k;
-                    int value, color = 0;
-                    switch (posIndex)
-                    {
-                        case 0:
-                            value = pos1Value;
-                            color = pos1Color;
-                            break;
-                        case 1:
-                            value = pos2Value;
-                            color = pos2Color;
-                            break;
-                        case 2:
-                            value = pos3Value;
-                            color = pos3Color;
-                            break;
-                        case 3:
-                            value = pos4Value;
-                            color = pos4Color;
-                            break;
-                        case 4:
-                            value = pos5Value;
-                            color = pos5Color;
-                            break;
-                        case 5:
-                            value = pos6Value;
-                            color = pos6Color;
-                            break;
-                        case 6:
-                            value = pos7Value;
-                            color = pos7Color;
-                            break;
-                        case 7:
-                            value = pos8Value;
-                            color = pos8Color;
-                            break;
-                        case 8:
-                            value = pos9Value;
-                            color = pos9Color;
-                            break;
-                        default:
-                            value = -1;
-                            color = -1;
-                            break;
-                    }
-
-                    string displayChar = "";
-                    if (value == 1)
-                    { // D
-                        if (color == 1)
-                        {
-                            displayChar = "D ";
-                            Console.ForegroundColor = ConsoleColor.Red;
-                        }
-                        else if (color == 2)
-                        {
-                            displayChar = "D ";
-                            Console.ForegroundColor = ConsoleColor.Green;
-                        }
-                        else if (color == 3)
-                        {
-                            displayChar = "D ";
-                            Console.ForegroundColor = ConsoleColor.Blue;
-                        }
-                    }
-                    else if (value == 2)
-                    { // E
-                        if (color == 1)
-                        {
-                            displayChar = "E ";
-                            Console.ForegroundColor = ConsoleColor.Red;
-                        }
-                        else if (color == 2)
-                        {
-                            displayChar = "E ";
-                            Console.ForegroundColor = ConsoleColor.Green;
-                        }
-                        else if (color == 3)
-                        {
-                            displayChar = "E ";
-                            Console.ForegroundColor = ConsoleColor.Blue;
-                        }
-                    }
-                    else if (value == 3)
-                    { // U
-                        if (color == 1)
-                        {
-                            displayChar = "U ";
-                            Console.ForegroundColor = ConsoleColor.Red;
-                        }
-                        else if (color == 2)
-                        {
-                            displayChar = "U ";
-                            Console.ForegroundColor = ConsoleColor.Green;
-                        }
-                        else if (color == 3)
-                        {
-                            displayChar = "U ";
-                            Console.ForegroundColor = ConsoleColor.Blue;
-                        }
-                    }
-
-                    Console.Write(displayChar);
-                }
-                Console.ResetColor();
-                Console.WriteLine(" |");
-            }
-            Console.WriteLine(" +--------+");
-            Console.WriteLine("");
+            Console.WriteLine();
+            Console.WriteLine("User's Point: " + userPoint);
+            Console.WriteLine("Computer's Point: " + computerPoint);
             for (int n = 0; n < 4; n++)
             {
                 switch (rand.Next(9))
