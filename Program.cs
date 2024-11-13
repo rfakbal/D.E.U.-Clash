@@ -500,6 +500,8 @@ public class Program
                                 break;
                         }
                     }
+
+                    // Printing board
                     Console.WriteLine("   1 2 3");
                     Console.WriteLine(" +--------+");
                     for (int j = 0; j < 3; j++)
@@ -507,8 +509,11 @@ public class Program
                         Console.Write((j + 1) + "| ");
                         for (int k = 0; k < 3; k++)
                         {
-                            int posIndex = j * 3 + k;
+                            int posIndex = j * 3 + k;  // Calculate position index
                             int value, color = 0;
+
+                            // Determine the value and color based on position index
+                            // Each case corresponds to a specific cell on the 3x3 board
                             switch (posIndex)
                             {
                                 case 0:
@@ -609,7 +614,7 @@ public class Program
                                 }
                             }
 
-                            Console.Write(displayChar);
+                            Console.Write(displayChar); // Print the character on the board
                         }
                         Console.ResetColor();
                         Console.WriteLine(" |");
@@ -1742,7 +1747,20 @@ public class Program
             Console.WriteLine("Computer's Point: " + computerPoint);
 
         }
+
+        else if (userPoint == computerPoint)
+        {
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("TTTTTTT     IIIIIII    EEEEEEE\n   T           I       E\n   T           I       EEEEEE\n   T           I       E\n   T        IIIIIII    EEEEEEE");
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("User's Point: " + userPoint);
+            Console.WriteLine("Computer's Point: " + computerPoint);
+        }
+
         else
+
         {
             Console.WriteLine("");
             Console.WriteLine("");
