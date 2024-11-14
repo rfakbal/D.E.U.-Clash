@@ -11,6 +11,33 @@ public class Program
 
     public static void Main(string[] args)
     {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine(@"
+              __          __  _                                        
+              \ \        / / | |                                       
+               \ \  /\  / /__| | ___ ___  _ __ ___   ___                
+                \ \/  \/ / _ \ |/ __/ _ \| '_ ` _ \ / _ \               
+                 \  /\  /  __/ | (_| (_) | | | | | |  __/               
+                  \/  \/ \___|_|\___\___/|_| |_| |_|\___|               
+                              _______
+                             |__   __|                                 
+                                | | ___                                
+                                | |/ _ \                               
+                                | | (_) |   
+                                |_|\___/
+            ");
+
+        Console.WriteLine(@"
+           _____  ______ _    _     ___  _                _____ _    _ 
+          |  __ \|  ____| |  | |  / ____| |        /\    / ____| |  | |
+          | |  | | |__  | |  | | | |    | |       /  \  | (___ | |__| |
+          | |  | |  __| | |  | | | |    | |      / /\ \  \___ \|  __  |
+          | |__| | |____| |__| | | |____| |____ / ____ \ ____) | |  | |
+          |_____/|______|\____/   \_____|______/_/    \_\_____/|_|  |_| 
+            ");
+
+        // Rengi sıfırlıyoruz
+        Console.ResetColor();
         int pos1Value, pos2Value, pos3Value, pos4Value, pos5Value,// for each position (1-9) 
             pos6Value, pos7Value, pos8Value, pos9Value, pos1Color, // there exist 2 variables its color(RGB) 
             pos2Color, pos3Color, pos4Color, pos5Color, pos6Color, // and its letter value (DEU)
