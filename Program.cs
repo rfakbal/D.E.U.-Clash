@@ -36,7 +36,6 @@ public class Program
           |_____/|______|\____/   \_____|______/_/    \_\_____/|_|  |_| 
             ");
 
-        // Rengi sıfırlıyoruz
         Console.ResetColor();
         int pos1Value, pos2Value, pos3Value, pos4Value, pos5Value,// for each position (1-9) 
             pos6Value, pos7Value, pos8Value, pos9Value, pos1Color, // there exist 2 variables its color(RGB) 
